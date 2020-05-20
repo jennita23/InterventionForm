@@ -61,82 +61,76 @@
             <h3 align="center" style="color:grey;"> Formulaire de demande d'intervention technique </h3>
             <br>
 
-       <form class="form" role="form"  method="POST"  accept-charset="UTF-8"  onsubmit="return false">
+
+       <form class="form-inline"  role="form"  method="POST"  accept-charset="UTF-8"  onsubmit="return false">
           <!--Formulaire intervention etudiant-->
              <h5 align="center"> Information Personelle </h5>
              <br>
              <div  class="display_error_msg" id="message" > </div>
 
+             <div class="form-group row flex-v-center">
+              <div class="col-6 ">
+                <span class="display_error_msg" id="errors"></span>
              <div class="input-container">
-               <i class='far fa-address-card icon' style='font-size:20px'></i>
-               <input  class="input-field" type="text" id="sicStudent" placeholder="Sic No" name="sic" />
-               <span class="display_error_msg" id="errors"></span>
-             </div>
-             <br>
 
+               <i class='far fa-address-card icon' style='font-size:15px'></i>
+               <input  class="input-field" type="text" id="sicStudent" placeholder="Sic No" name="sic" />
+
+             </div>
+           </div>
+
+             <div class="col-6">
+               <span class="display_error_msg" id="errorn"></span >
              <div class="input-container">
                <i class="fa fa-user icon" style='font-size:15px'></i>
                <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" />
-                  <span class="display_error_msg" id="errorn"></span >
-             </div>
-             <br>
 
+             </div>
+           </div>
+         </div>
+
+             <br>
+             <div class="form-group row flex-v-center">
+              <div class="col-6 ">
+              <span class="display_error_msg" id="errorp"></span >
              <div class="input-container">
                <i class="fa fa-user icon" style='font-size:15px'></i>
                <input  class="input-field" type="text" id="prenom" placeholder="Prénom" name="prenom" />
-                  <span class="display_error_msg" id="errorp"></span >
-            </div>
-            <br>
 
+            </div>
+          </div>
+
+            <div class="col-6">
+             <span class="display_error_msg" id="errore"></span >
              <div class="input-container">
                <i class="far fa-envelope icon " style='font-size:17px'></i>
                <input  class="input-field" type="text" id="email" placeholder="Adresse Email UDM " name="email" />
-                  <span class="display_error_msg" id="errore"></span >
              </div>
-             <br>
+           </div>
+         </div>
 
+
+            <span class="display_error_msg" id="errord"></span >
              <div class="input-container">
                <i class="fas fa-calendar-alt icon " style='font-size:17px'></i>
-               <input type="date"  class="input-field"   id="date" name="date ">
-                  <span class="display_error_msg" id="errord"></span >
+               <input type="date"  style='width :287px' class="input-field"   id="date" name="date ">
              </div>
-              <br>
 
-
+             <br>
+             <div>
               <h5 align="center"> Demande  Intervention </h5>
-                 <br>
-                 <label style="color:black;font-weight: 900;"> Catégorie de problème </label> <select id="equipment" class="input-field" >
+
+                 Catégorie de problème   <select id="equipment" class="input-field" >
                    <option value="Wifi">Wifi</option>
                    <option value="Projecteur">Projecteur</option>
                    <option value="Adresse Email UDM">Adresse Email UDM</option>
                    <option value="PC">PC</option>
-                   <option value="OS (Window,Linux)">OS (Window,Linux)</option>
+                   <option value="OS">OS (Window,Linux)</option>
                    <option value="Autre">Autre</option>
 
                     </select>
 
                     <br>
-
-
-            <!--radio button for priority  -->
-          <label style="color:black;font-weight: 900;">Type de connexion WIFI </label>
-           <label class="radio-inline">
-             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios1" id="exampleRadios11" value="Câblé" >
-               <label class="form-check-label" for="exampleRadios1">
-                          Câblé
-              </label>
-             </div>
-          </label>
-
-             <label class="radio-inline">
-               <div class="form-check">
-                  <input class="form-check-input" type="radio" name="exampleRadios1" id="exampleRadios21" value="Câblé" >
-                <label class="form-check-label" for="exampleRadios2">
-                      Sans fil
-                </label>
-                </div>
-             </label>
              <br>
 
           <label style="color:black;font-weight: 900;">Laboratoire concerné  </label>
@@ -175,6 +169,7 @@
              </div>
            </form>
          </div>
+
 
 
     <script src="js/vendor/jquery-2.2.4.min.js"></script>

@@ -31,8 +31,7 @@ function verification() {
                {
                    $('#nom').css("border-color","#CF161E");
                     document.getElementById('errorn').innerHTML = "*Vous devez insérer votre nom ";
-                    //alert("required");
-                     //error = true;
+                    
                }
 
 							 if (prenom == "")
@@ -40,8 +39,7 @@ function verification() {
                {
                    $('#prenom').css("border-color","#CF161E");
                     document.getElementById('errorp').innerHTML = "*Vous devez insérer votre prénom ";
-                    //alert("required");
-                     //error = true;
+
                }
 
 							 if (email== "")
@@ -49,8 +47,7 @@ function verification() {
 							 {
 									 $('#email').css("border-color","#CF161E");
 										document.getElementById('errore').innerHTML = "*Vous devez insérer votre adresse Email UDM ";
-										//alert("required");
-										 //error = true;
+
 							 }
 
 							 if (date== "")
@@ -58,8 +55,7 @@ function verification() {
 							 {
 									 $('#date').css("border-color","#CF161E");
 										document.getElementById('errord').innerHTML = "*Vous devez insérer la date  ";
-										//alert("required");
-										 //error = true;
+
 							 }
 
 
