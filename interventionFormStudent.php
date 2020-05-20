@@ -84,21 +84,21 @@
              <div class="input-container">
                <i class="fa fa-user icon" style='font-size:15px'></i>
                <input  class="input-field" type="text" id="prenom" placeholder="Prénom" name="prenom" />
-                  <span class="display_error_msg" id="erroru"></span >
+                  <span class="display_error_msg" id="errorp"></span >
             </div>
             <br>
 
              <div class="input-container">
                <i class="far fa-envelope icon " style='font-size:17px'></i>
                <input  class="input-field" type="text" id="email" placeholder="Adresse Email UDM " name="email" />
-                  <span class="display_error_msg" id="erroru"></span >
+                  <span class="display_error_msg" id="errore"></span >
              </div>
              <br>
 
              <div class="input-container">
                <i class="fas fa-calendar-alt icon " style='font-size:17px'></i>
                <input type="date"  class="input-field"   id="date" name="date ">
-                  <span class="display_error_msg" id="erroru"></span >
+                  <span class="display_error_msg" id="errord"></span >
              </div>
               <br>
 
