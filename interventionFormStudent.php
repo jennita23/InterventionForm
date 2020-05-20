@@ -60,9 +60,10 @@
          <!--forulaire de demane intervention etudiant-->
             <h3 align="center" style="color:grey;"> Formulaire de demande d'intervention technique </h3>
             <br>
-
-           <h4 align="center"> Information Personelle </h4>
+   <div>
+           <h4 align="center">Information Personelle </h4>
           <br>
+
        <form class="form-inline"  role="form"  method="POST"  accept-charset="UTF-8"  onsubmit="return false">
           <!--Formulaire intervention etudiant-->
 
@@ -121,10 +122,12 @@
              <div>
                  <br>
               <h4 align="center"> Demande  Intervention </h4>
+              <br>
 
        <div class="row">
             <div class="col">
-                 Catégorie de problème   <select id="equipment" class="input-field"  >
+              Catégorie de problème
+                  <select id="equipment" class="input-field"  >
                    <option value="">Choissez une catégorie ...</option>
                    <option value="Wifi">Wifi</option>
                    <option value="Projecteur">Projecteur</option>
