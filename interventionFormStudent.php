@@ -61,10 +61,11 @@
             <h3 align="center" style="color:grey;"> Formulaire de demande d'intervention technique </h3>
             <br>
 
-
+           <h4 align="center"> Information Personelle </h4>
+          <br>
        <form class="form-inline"  role="form"  method="POST"  accept-charset="UTF-8"  onsubmit="return false">
           <!--Formulaire intervention etudiant-->
-             <h5 align="center"> Information Personelle </h5>
+
              <br>
              <div  class="display_error_msg" id="message" > </div>
 
@@ -118,9 +119,13 @@
 
              <br>
              <div>
-              <h5 align="center"> Demande  Intervention </h5>
+                 <br>
+              <h4 align="center"> Demande  Intervention </h4>
 
-                 Catégorie de problème   <select id="equipment" class="input-field" >
+       <div class="row">
+            <div class="col">
+                 Catégorie de problème   <select id="equipment" class="input-field" style='width:300px;' >
+                   <option value="">Choissez une catégorie ...</option>
                    <option value="Wifi">Wifi</option>
                    <option value="Projecteur">Projecteur</option>
                    <option value="Adresse Email UDM">Adresse Email UDM</option>
@@ -129,38 +134,40 @@
                    <option value="Autre">Autre</option>
 
                     </select>
-
-                    <br>
-             <br>
-
-          <label style="color:black;font-weight: 900;">Laboratoire concerné  </label>
-                     <select id="lab" class="input-field" >
+                </div>
+        <br>
+          <div class="col-6">
+          Laboratoire concerné
+                     <select id="lab" class="input-field"  >
+                       <option value="">Choissez une laboratoire </option>
                                   <option value="B105">B105</option>
                                   <option value="D21">D21</option>
                                   <option value="C21">C21</option>
                                   <option value="B214">B214</option>
                     </select>
+            </div>
 
-              <br>
-
-              <label style="color:black;font-weight: 900;">Département  </label>
+              <div class="col-6">
+            Département
                     <select id="dep" class="input-field" >
+                      <option value="">Choissez un département </option>
                             <option value="Informatique Appliquée">Informatique Appliquée</option>
                             <option value="Génie éléctrique">Génie éléctrique</option>
                             <option value="Génie éléctrique">Génie éléctrique</option>
                             <option value="Génie mécanique">Génie mécanique</option>
                     </select>
-
+                </div>
+              </div>
               <br>
 
 
 
       <!-- textarea for remark -->
-            <div class="form-group">
-           <textarea class="form-control" style="font-size:14px;" rows="5" id="comment" placeholder="Énoncer brièvement le problème" ></textarea>
-            </div>
 
+           <textarea class="form-control" style="font-size:14px;" rows="5"  cols="51" id="comment" placeholder="Énoncer brièvement le problème" ></textarea>
 
+        <br>
+        <br>
       <button type="submit" name="form1" id="form1" class="butp" onClick="verification()" id="ok">Soumettre une demande</button>
 
              <div class="login_bottom">
