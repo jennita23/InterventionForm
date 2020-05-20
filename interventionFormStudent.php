@@ -124,7 +124,7 @@
 
        <div class="row">
             <div class="col">
-                 Catégorie de problème   <select id="equipment" class="input-field" style='width:300px;' >
+                 Catégorie de problème   <select id="equipment" class="input-field"  >
                    <option value="">Choissez une catégorie ...</option>
                    <option value="Wifi">Wifi</option>
                    <option value="Projecteur">Projecteur</option>
