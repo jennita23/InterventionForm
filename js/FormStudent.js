@@ -7,12 +7,13 @@ function verification() {
 	var prenom = document.getElementById("prenom").value;
 	var email = document.getElementById("email").value;
 	var date = document.getElementById("date").value;
+	var comment = document.getElementById("comment").value;
 
   //re intialise les textbox
   //$('#sicStudent').css("border-color","#CCC");
   //$('#nom').css("border-color","#CCC");
 
-    if (  sicStudent == ""  || nom =="" || prenom ==""  || email  ==""  || date ==""  )
+    if (  sicStudent == ""  || nom =="" || prenom ==""  || email  ==""  || date =="" || comment ==""  )
        {
            error=true;
      //si un textbox est vide
@@ -30,15 +31,15 @@ function verification() {
 
                {
                    $('#nom').css("border-color","#CF161E");
-                    document.getElementById('errorn').innerHTML = "*Vous devez insérer votre nom ";
-                    
+                    document.getElementById('errorn').innerHTML = "*Vous devez insérer votre nom. ";
+
                }
 
 							 if (prenom == "")
 
                {
                    $('#prenom').css("border-color","#CF161E");
-                    document.getElementById('errorp').innerHTML = "*Vous devez insérer votre prénom ";
+                    document.getElementById('errorp').innerHTML = "*Vous devez insérer votre prénom. ";
 
                }
 
@@ -46,7 +47,7 @@ function verification() {
 
 							 {
 									 $('#email').css("border-color","#CF161E");
-										document.getElementById('errore').innerHTML = "*Vous devez insérer votre adresse Email UDM ";
+										document.getElementById('errore').innerHTML = "*Vous devez insérer votre adresse Email UDM. ";
 
 							 }
 
@@ -54,9 +55,17 @@ function verification() {
 
 							 {
 									 $('#date').css("border-color","#CF161E");
-										document.getElementById('errord').innerHTML = "*Vous devez insérer la date  ";
+										document.getElementById('errord').innerHTML = "*Vous devez insérer la date.  ";
 
 							 }
+
+							 if (comment== "")
+
+							{
+									$('#comment').css("border-color","#CF161E");
+									 document.getElementById('errorr').innerHTML = "*Vous devez énoncer brièvement le problème. ";
+
+							}
 
 
           }
