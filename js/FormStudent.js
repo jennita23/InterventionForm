@@ -27,7 +27,7 @@ function verification() {
 
                {
                    $('#nom').css("border-color","#CF161E");
-                    document.getElementById('errorn').innerHTML = "* Please provide a  password ";
+                    document.getElementById('errorn').innerHTML = "*Vous devez insérer votre nom ";
                     //alert("required");
                      //error = true;
                }
