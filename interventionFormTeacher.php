@@ -66,59 +66,68 @@
          <!--forulaire de demane intervention etudiant-->
             <h3 align="center" style="color:grey;"> Formulaire de demande d'intervention technique </h3>
             <br>
-       <form class="form" role="form" method="POST" accept-charset="UTF-8" >
+       <form class="form-inline"  role="form" method="POST" accept-charset="UTF-8" onsubmit="return false">
 
           <!--Formulaire intervention etudiant-->
             <div  class="display_error_msg" id="message" > </div>
-             <h5 align="center"> Information Personelle </h5>
+            <div>
+              <br>
+             <h4 align="center"> Information Personelle </h4>
              <br>
 
-             <div class="input-container">
-               <i class='far fa-address-card icon' style='font-size:20px'></i>
-               <input  class="input-field" type="text" id="sic" placeholder="Sic No" name="sic" />
-                  <span class="display_error_msg" id="erroru"></span >
-             </div>
-
-             <br>
-
+             <div class="form-group row flex-v-center">
+              <div class="col-6 ">
+           <span class="display_error_msg" id="errorN"></span >
              <div class="input-container">
                <i class="fa fa-user icon" style='font-size:15px'></i>
                <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" />
-                  <span class="display_error_msg" id="erroru"></span >
-
              </div>
+           </div>
 
-             <br>
 
+
+         <div class="col-6 ">
+           <span class="display_error_msg" id="errorP"></span >
              <div class="input-container">
                <i class="fa fa-user icon" style='font-size:15px'></i>
                <input  class="input-field" type="text" id="prenom" placeholder="Prénom" name="prenom" />
-                  <span class="display_error_msg" id="erroru"></span >
 
              </div>
+             </div>
+             </div>
 
-               <br>
 
+
+          <div class="form-group row flex-v-center">
+          <div class="col">
+            <span class="display_error_msg" id="errorE"></span >
              <div class="input-container">
                <i class="far fa-envelope icon " style='font-size:17px'></i>
                <input  class="input-field" type="text" id="email" placeholder="Adresse Email UDM " name="email" />
-                  <span class="display_error_msg" id="erroru"></span >
-             </div>
+            </div>
+        </div>
 
-             <br>
 
+
+       <div class="col">
+            <span class="display_error_msg" id="errord"></span >
              <div class="input-container">
                <i class="fas fa-calendar-alt icon " style='font-size:17px'></i>
                <input type="date"  class="input-field"   id="date" name="date ">
-                  <span class="display_error_msg" id="erroru"></span >
+
              </div>
+            </div>
+            </div>
+            <div>
+             <br>
+              <h4 align="center"> Demande  Intervention </h4>
+              <br>
 
-               <br>
 
-              <h5 align="center"> Demande  Intervention </h5>
-                 <br>
-
-                 <label style="color:black;font-weight: 900;"> Détails de l'équipement </label> <select id="equipment" class="input-field" >
+              <div class="row">
+                <div class="col-6">
+              Détails de l'équipement
+               <select id="equipment" class="input-field" >
                    <option value="PC">PC</option>
                    <option value="Laptop">Laptop</option>
                    <option value="Disque dur">Disque dur</option>
@@ -132,38 +141,34 @@
                     <option value="Appareil photo ou audio">Appareil photo ou audio</option>
                     <option value="Imprimantes">Imprimantes</option>
                     <option value="Renouvellement de la cartouche">Renouvellement de la cartouche</option>
-
-
-
                     </select>
+            </div>
 
-            <br>
-
-            <br>
-
-            <label style="color:black;font-weight: 900;">Catégorie </label> <select id="equipment" class="input-field" >
+            <div class="col-6">
+            Catégorie
+            <select id="equipment" class="input-field" >
               <option value="Bureau">Bureau</option>
               <option value="Équipement de laboratoire">Équipement de laboratoire</option>
               <option value="Personnel">Personnel</option>
             </select>
-
             <br>
-
-            <div class="input-container">
-              <i class="" style='font-size:15px'></i>
-              <input  class="input-field" type="text" id="localisation" placeholder="No Bureau/Classe concerné" name="localisation" />
-                 <span class="display_error_msg" id="erroru"></span >
-
-            </div>
-
-
+          </div>
           <br>
 
-
-      <!-- textarea for remark -->
-            <div class="form-group">
-           <textarea class="form-control" style="font-size:14px;" rows="5" id="comment" placeholder="Énoncer brièvement le problème" ></textarea>
+           <div class="col-6">
+           <span class="display_error_msg" id="errorL"></span >
+            <div class="input-container">
+              <i class="" style='font-size:15px'></i>
+              <input  class="input-field"  type="text" id="localisation" placeholder="No Bureau/Classe concerné" name="localisation" />
             </div>
+          </div>
+        </div>
+
+        <br>
+      <!-- textarea for remark -->
+          <span class="display_error_msg" id="errorr"></span >
+           <textarea class="form-control" style="font-size:14px;" rows="5" cols="51"  id="comment" placeholder="Énoncer brièvement le problème" ></textarea>
+
 
      <!--<button type="button" class="btn_login"  onClick="verification()" id="ok">LOGIN </button>-->
       <button type="submit" name="form1" id="form1" class="butp" onClick="verification()" id="ok" >Soumettre une demande</button>
@@ -198,6 +203,7 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/TeacherForm.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   </body>
 </html>
