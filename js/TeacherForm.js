@@ -52,7 +52,7 @@ function verification() {
 
               {
                   $('#localisation').css("border-color","#CF161E");
-                   document.getElementById('errorL').innerHTML = "*Vous devez énoncer brièvement le problème. ";
+                   document.getElementById('errorL').innerHTML = "*Vous devez insérer No Classe/Bureau concerné. ";
 
               }
 

@@ -128,6 +128,7 @@
                 <div class="col-6">
               Détails de l'équipement
                <select id="equipment" class="input-field" >
+                   <option value="">Choissez l'équipement</option>
                    <option value="PC">PC</option>
                    <option value="Laptop">Laptop</option>
                    <option value="Disque dur">Disque dur</option>
@@ -147,6 +148,7 @@
             <div class="col-6">
             Catégorie
             <select id="equipment" class="input-field" >
+              <option value="">Choissez votre localisation</option>
               <option value="Bureau">Bureau</option>
               <option value="Équipement de laboratoire">Équipement de laboratoire</option>
               <option value="Personnel">Personnel</option>
