@@ -204,7 +204,7 @@ text-align:justify;
 .login_wrapper{
   padding-top: 200px;
   margin: auto;
-  width: 500px;
+  width: 700px;
 }
 
 .login_wrapper .login_bottom{
@@ -216,13 +216,14 @@ text-align:justify;
   color: #228B22;
 }
 
+
 .display_error_msg{
   color:red
 }
 /*for admin forgot password */
 .login_wrapper .login_admin{
   padding-top: 20px;
-  
+
 
 }
 .login_admin a:hover{
