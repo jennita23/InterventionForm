@@ -8,12 +8,16 @@ function verification() {
 	var email = document.getElementById("email").value;
 	var date = document.getElementById("date").value;
 	var comment = document.getElementById("comment").value;
+	var equipment = document.getElementById("equipment").value;
+	var lab =  document.getElementById("lab").value;
+  var dept = document.getElementById("dept").value;
+
 
   //re intialise les textbox
   //$('#sicStudent').css("border-color","#CCC");
   //$('#nom').css("border-color","#CCC");
 
-    if (  sicStudent == ""  || nom =="" || prenom ==""  || email  ==""  || date =="" || comment ==""  )
+    if (  sicStudent == ""  || nom =="" || prenom ==""  || email  ==""  || date =="" || comment =="" || equipment  =="" || lab =="" || dept ==""  )
        {
            error=true;
      //si un textbox est vide
@@ -58,6 +62,30 @@ function verification() {
 										document.getElementById('errord').innerHTML = "*Vous devez insérer la date.  ";
 
 							 }
+
+							 if (equipment== "")
+
+							 {
+									 $('#equipment').css("border-color","#CF161E");
+										//document.getElementById('errord').innerHTML = "*Vous devez insérer la date.  ";
+
+							 }
+
+							 if (lab== "")
+
+							 {
+									 $('#lab').css("border-color","#CF161E");
+										//document.getElementById('errord').innerHTML = "*Vous devez insérer la date.  ";
+
+							 }
+
+							 if (dept== "")
+
+							{
+									$('#dept').css("border-color","#CF161E");
+									 //document.getElementById('errord').innerHTML = "*Vous devez insérer la date.  ";
+
+							}
 
 							 if (comment== "")
 

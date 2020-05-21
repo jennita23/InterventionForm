@@ -130,7 +130,9 @@
 
        <div class="row">
             <div class="col">
+
               Catégorie de problème
+
                   <select id="equipment" class="input-field">
                    <option value="">Choissez une catégorie ...</option>
                    <option value="Wifi">Wifi</option>
@@ -156,7 +158,7 @@
 
               <div class="col-6">
             Département
-                    <select id="dep" class="input-field" >
+                    <select id="dept" class="input-field" >
                       <option value="">Choissez un département </option>
                             <option value="Informatique Appliquée">Informatique Appliquée</option>
                             <option value="Génie éléctrique">Génie éléctrique</option>
