@@ -67,7 +67,7 @@ function verification() {
 
 							 {
 									 $('#equipment').css("border-color","#CF161E");
-										//document.getElementById('errord').innerHTML = "*Vous devez insérer la date.  ";
+
 
 							 }
 
@@ -75,7 +75,7 @@ function verification() {
 
 							 {
 									 $('#lab').css("border-color","#CF161E");
-										//document.getElementById('errord').innerHTML = "*Vous devez insérer la date.  ";
+
 
 							 }
 
@@ -83,7 +83,7 @@ function verification() {
 
 							{
 									$('#dept').css("border-color","#CF161E");
-									 //document.getElementById('errord').innerHTML = "*Vous devez insérer la date.  ";
+									
 
 							}
 
