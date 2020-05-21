@@ -14,8 +14,16 @@ function verification() {
 
 
   //re intialise les textbox
-  //$('#sicStudent').css("border-color","#CCC");
-  //$('#nom').css("border-color","#CCC");
+  $('#sicStudent').css("border-color","#CCC");
+  $('#nom').css("border-color","#CCC");
+	$('#prenom').css("border-color","#CCC");
+  $('#email').css("border-color","#CCC");
+	$('#date').css("border-color","#CCC");
+  $('#comment').css("border-color","#CCC");
+	$('#lab').css("border-color","#CCC");
+	$('#dept').css("border-color","#CCC");
+	$('#equipment').css("border-color","#CCC");
+
 
     if (  sicStudent == ""  || nom =="" || prenom ==""  || email  ==""  || date =="" || comment =="" || equipment  =="" || lab =="" || dept ==""  )
        {
@@ -25,7 +33,7 @@ function verification() {
              {
                  $('#sicStudent').css("border-color","#CF161E");
                    document.getElementById('errors').innerHTML = "*Vous devez insérer votre SIC No ";
-                  // alert("required");
+
 
                  error = true;
              }
@@ -83,7 +91,7 @@ function verification() {
 
 							{
 									$('#dept').css("border-color","#CF161E");
-									
+
 
 							}
 
