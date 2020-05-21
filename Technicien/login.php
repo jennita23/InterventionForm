@@ -42,7 +42,7 @@
 
             <ul class="nav-menu">
                 <li><a href="index.html">Acceuil</a></li>
-              <li><a href="interventionFormStudent.html">Demande Intervention</a></li>
+              
               <li><a href="login.php">Connexion</a></li>
                 </ul>
           </nav><!-- #nav-menu-container -->
