@@ -41,8 +41,8 @@
           <nav id="nav-menu-container">
 
             <ul class="nav-menu">
-                <li><a href="index.html">Acceuil</a></li>
-              
+                <li><a href="../index.html">Acceuil</a></li>
+
               <li><a href="login.php">Connexion</a></li>
                 </ul>
           </nav><!-- #nav-menu-container -->
@@ -82,7 +82,8 @@
           </div>
 
   <!--<button type="button" class="btn_login"  onClick="verification()" id="ok">LOGIN </button>-->
-   <button type="submit" name="login" id="login" class="butp"  onClick="verification()" id="ok" >Login</button>
+
+   <button type="submit" name="login" id="login" class="butp"  onClick="verification()" id="ok" >Login </button>
           <!--<button type="button" class="btn" >LOGIN</button>-->
           <div class="login_bottom">
 
