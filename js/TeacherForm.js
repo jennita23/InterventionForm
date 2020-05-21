@@ -11,9 +11,16 @@ function verification() {
 	var equipment = document.getElementById("equipment").value;
   var categorieLocalisation = document.getElementById("categorieLocalisation").value;
 
-  //re intialise les textbox
-  //$('#sicStudent').css("border-color","#CCC");
-  //$('#nom').css("border-color","#CCC");
+	//re intialise les textbox
+
+  $('#nom').css("border-color","#CCC");
+	$('#prenom').css("border-color","#CCC");
+  $('#email').css("border-color","#CCC");
+	$('#date').css("border-color","#CCC");
+  $('#comment').css("border-color","#CCC");
+	$('#localisation').css("border-color","#CCC");
+	$('#categorieLocalisation').css("border-color","#CCC");
+	$('#equipment').css("border-color","#CCC");
 
     if ( nom =="" || prenom ==""  || email  ==""  || date =="" || localisation =="" ||  comment ==""  || equipment  =="" || categorieLocalisation =="")
        {
