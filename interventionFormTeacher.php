@@ -166,11 +166,10 @@
           </div>
         </div>
 
-        <br>
+        
       <!-- textarea for remark -->
           <span class="display_error_msg" id="errorr"></span >
            <textarea class="form-control" style="font-size:14px;" rows="5" cols="51"  id="comment" placeholder="Énoncer brièvement le problème" ></textarea>
-
 
      <!--<button type="button" class="btn_login"  onClick="verification()" id="ok">LOGIN </button>-->
       <button type="submit" name="form1" id="form1" class="butp" onClick="verification()" id="ok" >Soumettre une demande</button>
