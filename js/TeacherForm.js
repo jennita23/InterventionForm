@@ -8,12 +8,14 @@ function verification() {
 	var date = document.getElementById("date").value;
   var localisation = document.getElementById("localisation").value;
 	var comment = document.getElementById("comment").value;
+	var equipment = document.getElementById("equipment").value;
+  var categorieLocalisation = document.getElementById("categorieLocalisation").value;
 
   //re intialise les textbox
   //$('#sicStudent').css("border-color","#CCC");
   //$('#nom').css("border-color","#CCC");
 
-    if ( nom =="" || prenom ==""  || email  ==""  || date =="" || localisation =="" ||  comment ==""  )
+    if ( nom =="" || prenom ==""  || email  ==""  || date =="" || localisation =="" ||  comment ==""  || equipment  =="" || categorieLocalisation =="")
        {
              //si le texttbox pour inserer lastname est vide
                if (nom == "")
@@ -63,6 +65,23 @@ function verification() {
 									 document.getElementById('errorr').innerHTML = "*Vous devez énoncer brièvement le problème. ";
 
 							}
+
+
+							if (equipment== "")
+
+							{
+									$('#equipment').css("border-color","#CF161E");
+
+							}
+
+
+							if (categorieLocalisation== "")
+
+									{
+
+											$('#categorieLocalisation').css("border-color","#CF161E");
+
+									}
 
 
           }

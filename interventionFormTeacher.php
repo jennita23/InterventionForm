@@ -147,7 +147,7 @@
 
             <div class="col-6">
             Catégorie
-            <select id="equipment" class="input-field" >
+            <select id="categorieLocalisation" class="input-field" >
               <option value="">Choissez votre localisation</option>
               <option value="Bureau">Bureau</option>
               <option value="Équipement de laboratoire">Équipement de laboratoire</option>
@@ -196,9 +196,9 @@
     <script src="js/superfish.min.js"></script>
     <script src="js/jquery.ajaxchimp.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
-      <script src="js/jquery.tabs.min.js"></script>
+    <script src="js/jquery.tabs.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
-          <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
     <script src="js/waypoints.min.js"></script>
     <script src="js/jquery.counterup.min.js"></script>
     <script src="js/simple-skillbar.js"></script>
