@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="../css/animate.min.css">
     <link rel="stylesheet" href="../css/owl.carousel.css">
     <link rel="stylesheet" href="../css/main.css">
-    <link href="../css/login.css" rel="stylesheet" type="text/css" />
+    <link href="../css/loginTechnician.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header id="header">
