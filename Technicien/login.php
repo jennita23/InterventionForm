@@ -51,7 +51,7 @@
     </header><!-- #header -->
 
     <div id="wrapper">
-       <?php include("layout/menulogin.php");?>
+
 
       <!--login form -->
       <!-- Display error message when login fail-->
@@ -60,27 +60,29 @@
 
       <!--  <form method="POST" action=""  > -->
 
-    <form class="form" role="form" method="POST" accept-charset="UTF-8" >
+    <form class="form" role="form" method="POST" accept-charset="UTF-8" onsubmit="return false">
 
           <h3 align="center">  LOGIN </h3>
            <div  class="display_error_msg" id="message" > </div>
+             <br>
 
-
+            <span class="display_error_msg" id="errorE"></span >
           <div class="input-container">
             <i class="fa fa-user icon"></i>
-            <input  class="input-field" type="text" id="icPatient" placeholder="Username" name="username"required />
-               <span class="display_error_msg" id="erroru"></span >
+            <input  class="input-field" type="text" id="email_tech"  placeholder="Adresse Email " name="email_tech" />
+               <span class="display_error_msg" id="errorE"></span >
 
           </div>
 
+      <span class="display_error_msg" id="errorpass"></span >
           <div class="input-container">
             <i class="fa fa-key icon"></i>
-            <input  class="input-field" type="password"  id="password" placeholder="Password" name="password" required/>
-            <span class="display_error_msg" id="errorpass"></span >
+            <input  class="input-field" type="password"  id="password"  placeholder="Mot de passe" name="password"  />
+
           </div>
 
   <!--<button type="button" class="btn_login"  onClick="verification()" id="ok">LOGIN </button>-->
-   <button type="submit" name="login" id="login" class="butp" onClick="verification()" id="ok" >Login</button>
+   <button type="submit" name="login" id="login" class="butp"  onClick="verification()" id="ok" >Login</button>
           <!--<button type="button" class="btn" >LOGIN</button>-->
           <div class="login_bottom">
 
@@ -113,7 +115,7 @@
     <script src="../js/mail-script.js"></script>
     <script src="../js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script src="../js/FormStudent.js"></script>
+    <script src="../js/login.js"></script>
 
   </body>
 </html>

@@ -3,31 +3,32 @@
   {
     var error=false;
   var password =document.getElementById("password").value;
-  var icPatient =document.getElementById("icPatient").value; //username
-  //var fname =document.getElementById("fname").value;
+  var email_tech =document.getElementById("email_tech").value; //email adress
+
+
   //re intialise les textbox
-  $('icPatient').css("border-color","#CCC");
+  $('#email_tech').css("border-color","#CCC");
     $('#password').css("border-color","#CCC");
 
 
-    if (  password == ""  || icPatient=="" )
+    if (  password == ""  || email_tech =="" )
      {
          error=true;
    //si un textbox est vide
            if (password == "")
            {
                $('#password').css("border-color","#CF161E");
-                 document.getElementById('erroru').innerHTML = "* Please provide a  username ";
+                 document.getElementById('errorE').innerHTML = "* Vous devez insérer votre Adresse Email. ";
 
                error = true;
            }
 
            //si le texttbox pour inserer lastname est vide
-             if (icPatient == "")
+             if (email_tech == "")
 
              {
-                 $('#icPatient').css("border-color","#CF161E");
-                  document.getElementById('errorpass').innerHTML = "* Please provide a  password ";
+                 $('#email_tech ').css("border-color","#CF161E");
+                  document.getElementById('errorpass').innerHTML = "* Vous devez insérer votre mot de passe. ";
              }
 
            }
