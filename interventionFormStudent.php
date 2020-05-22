@@ -1,3 +1,9 @@
+
+<?php
+include_once 'assets/conn/dbconnect.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
