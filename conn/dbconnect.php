@@ -1,5 +1,5 @@
 <?php
-<!-- mysqli connection to database  -->
+ //mysqli connection to database
 $mysqli = new mysqli("localhost","","","test");
 
 // Check connection
