@@ -1,3 +1,8 @@
+<?php
+include_once 'conn/dbconnect.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
@@ -166,7 +171,7 @@
           </div>
         </div>
 
-        
+
       <!-- textarea for remark -->
           <span class="display_error_msg" id="errorr"></span >
            <textarea class="form-control" style="font-size:14px;" rows="5" cols="51"  id="comment" placeholder="Énoncer brièvement le problème" ></textarea>
