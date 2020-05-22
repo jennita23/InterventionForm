@@ -144,7 +144,7 @@ include_once 'conn/dbconnect.php';
                     <option value="Clavier">Clavier</option>
                     <option value="Souris">Souris</option>
                     <option value="Batterie">Batterie</option>
-                    <option value="Appareil photo ou audio">Appareil photo ou audio</option>
+                    <option value="Appareil photo / audio">Appareil photo/Audio</option>
                     <option value="Imprimantes">Imprimantes</option>
                     <option value="Renouvellement de la cartouche">Renouvellement de la cartouche</option>
                     </select>
