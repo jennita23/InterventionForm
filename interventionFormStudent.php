@@ -1,4 +1,5 @@
 
+<!--test a connection with database-->
 <?php
 include_once 'assets/conn/dbconnect.php';
 
