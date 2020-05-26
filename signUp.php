@@ -70,7 +70,7 @@ include_once 'conn/dbconnect.php';
       <!-- form to register new user -->
       <br>
 
-      <form id='form_user'>
+      <form role="form"  method="POST"  accept-charset="UTF-8" onsubmit="return false">
           <span class="display_error_msg" id="errorN"></span >
         <div class="input-container">
           <i class="fa fa-user icon"></i>
