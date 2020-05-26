@@ -1,12 +1,11 @@
 
-<?php include("config/config.php");?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <?php include("layout/header.php");?>
+
   <link href="css/signUp.css" rel="stylesheet" type="text/css" />
-   <script src="js/src/signUp.js"></script>
+   <script src="js/signUp.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -43,15 +42,11 @@
         </div>
 
         <div class="input-container">
-            Birth Date : <input type="date"  id="birthday"  name="birthday">
+            Date de naissance : <input type="date"  id="birthday"  name="birthday">
               <span class="display_error_msg" id="errorBirthday"></span >
         </div>
 
-        <div class="input-container">
-          <i class="fa fa-user icon"></i>
-          <input  class="input-field" type="text" id="phone" placeholder="Phone Number" name="phone">
-          <span class="display_error_msg"  id="errorPhone"></span >
-        </div>
+
 
         <div class="input-container">
           <i class="fa fa-envelope icon"></i>
@@ -113,7 +108,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">User registration</h4>
+            <h4 class="modal-title">Demande inscription</h4>
           </div>
           <div class="modal-body">
             <p style="color: red;">An error occured please try again.</p>
@@ -126,6 +121,6 @@
       </div>
     </div>
 
-  <?php include("layout/footer.php");?>
+
 </body>
 </html>
