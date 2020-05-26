@@ -80,5 +80,10 @@ function verification() {
           }
 
 
+					if (!password.match(cpassword)) {
+							document.getElementById('errorConfirmPass').innerHTML = "*Le mot de passe ne correspond pas.";
+							error = true;
+						}
+
 
        };

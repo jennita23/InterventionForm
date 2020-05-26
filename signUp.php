@@ -105,7 +105,7 @@ include_once 'conn/dbconnect.php';
         <div class="input-container">
           <i class="fa fa-key icon"></i>
           <input  class="input-field" type="password"  id="password" placeholder="Mot de passe " name="password">
-
+          <span class="display_error_msg" id="errorConfirmPass"></span >
         </div>
 
 
@@ -113,9 +113,7 @@ include_once 'conn/dbconnect.php';
         <div class="input-container">
           <i class="fa fa-key icon"></i>
           <input class="input-field" type="password"  id="cpassword" placeholder="Confirmer mot de passe" name="cpassword">
-
-
-        </div>
+      </div>
 
         <div>
           <p id="text" style="color:#228B22;display:none" >Vous avez accepté les termes et conditions!</p>
