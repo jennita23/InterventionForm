@@ -20,7 +20,7 @@ include_once 'conn/dbconnect.php';
   <!-- meta character set -->
   <meta charset="UTF-8">
   <!-- Site Title -->
-  <title>Formulaire Intervention</title>
+  <title>S'inscrire</title>
 
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <!--
@@ -37,7 +37,7 @@ include_once 'conn/dbconnect.php';
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/main.css">
     <link href="css/signUp.css" rel="stylesheet" type="text/css" />
-     <script src="js/signUp.js"></script>
+
 
   </head>
   <body>
@@ -71,55 +71,58 @@ include_once 'conn/dbconnect.php';
       <br>
 
       <form id='form_user'>
+          <span class="display_error_msg" id="errorN"></span >
         <div class="input-container">
           <i class="fa fa-user icon"></i>
-          <input  class="input-field" type="text" id="fname" placeholder="Nom" name="fname">
-          <span class="display_error_msg" id="errorFname"></span >
+          <input  class="input-field" type="text" id="nom" placeholder="Nom" name="fname">
+        </div>
+
+  <span class="display_error_msg"  id="errorL"></span >
+        <div class="input-container">
+          <i class="fa fa-user icon"></i>
+          <input  class="input-field" type="text"  id="prenom" placeholder="Prénom" name="lname">
+
         </div>
 
 
-        <div class="input-container">
-          <i class="fa fa-user icon"></i>
-          <input  class="input-field" type="text"  id="lname" placeholder="Prénom" name="lname">
-          <span class="display_error_msg"  id="errorLname"></span >
-        </div>
 
 
-
-
-
+        <span class="display_error_msg" id="errord"></span >
         <div class="input-container">
             Date de naissance : <input type="date"  id="birthday" style="width:500px;height:35px;" name="birthday">
-              <span class="display_error_msg" id="errorBirthday"></span >
+        <span class="display_error_msg" id="errord"></span >
         </div>
 
 
-
+        <span class="display_error_msg" id="errorE"></span >
         <div class="input-container">
           <i class="fa fa-envelope icon"></i>
           <input  class="input-field"  id="email" type="text" placeholder="Adresse Email" name="email">
-          <span class="display_error_msg" id="erroremail"></span >
+
         </div>
 
+       <span class="display_error_msg" id="errorP"></span >
         <div class="input-container">
           <i class="fa fa-key icon"></i>
           <input  class="input-field" type="password"  id="password" placeholder="Mot de passe " name="password">
-          <span class="display_error_msg" id="errorPass"></span >
+
         </div>
 
+
+        <span class="display_error_msg" id="errorCP"></span >
         <div class="input-container">
           <i class="fa fa-key icon"></i>
-          <input class="input-field" type="password"  id="confirm_password" placeholder="Confirmer mot de passe" name="confirm_password">
-          <span class="display_error_msg" id="errorConfirmPass"></span >
+          <input class="input-field" type="password"  id="cpassword" placeholder="Confirmer mot de passe" name="cpassword">
         </div>
 
         <div>
-          <p id="text" style="color:#228B22;display:none" >You have agreed to the terms and conditions  !</p>
-          <a href="#">J'accepte Termes et conditions  </a>
-          <label><input type="checkbox" id="myCheck"  onclick="myFunction()"/> </label>
+          <p id="text" style="color:#228B22;display:none" >Vous avez accepté les termes et conditions!</p>
+          <a href="#">J'accepte les termes et conditions  </a>
+          <label><input type="checkbox" id="myCheck"  onclick="myFunction()"/></label>
           <span class="display_error_msg"  id="errorBox"></span >
         </div>
-         <button type="button" class="butp" onClick="verification()" id="ok"> S'incrire</button>
+          <button type="submit" name="form2" id="form2" class="butp" onClick="verification()" id="ok">S'incrire</button>
+
       </div>
 
     </form>
@@ -185,6 +188,7 @@ include_once 'conn/dbconnect.php';
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="js/signUp.js"></script>
 
 </body>
 </html>
