@@ -75,8 +75,8 @@ include_once 'conn/dbconnect.php';
             <span class="display_error_msg" id="errorE"></span >
           <div class="input-container">
             <i class="fa fa-user icon"></i>
-            <input  class="input-field" type="text" id="email_tech"  placeholder="Adresse Email " name="email_tech" />
-               <span class="display_error_msg" id="errorE"></span >
+            <input  class="input-field" type="text" id="email"  placeholder="Adresse Email " name="email_tech" />
+
 
           </div>
 
@@ -98,10 +98,6 @@ include_once 'conn/dbconnect.php';
         </form>
       </div>
     </div>
-
-
-
-
 
 
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
