@@ -103,25 +103,25 @@ include_once '../conn/dbconnect.php';
 
 
 
-    <script src="../js/vendor/jquery-2.2.4.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/vendor/bootstrap.min.js"></script>
-    <script src="../js/easing.min.js"></script>
-    <script src="../js/hoverIntent.js"></script>
-    <script src="../js/superfish.min.js"></script>
-    <script src="../js/jquery.ajaxchimp.min.js"></script>
-    <script src="../js/jquery.magnific-popup.min.js"></script>
-    <script src="../js/jquery.tabs.min.js"></script>
-    <script src="../js/jquery.nice-select.min.js"></script>
-    <script src="../js/isotope.pkgd.min.js"></script>
-    <script src="../js/waypoints.min.js"></script>
-    <script src="../js/jquery.counterup.min.js"></script>
-    <script src="../js/simple-skillbar.js"></script>
-    <script src="../js/owl.carousel.min.js"></script>
-    <script src="../js/mail-script.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="/js/easing.min.js"></script>
+    <script src="/js/hoverIntent.js"></script>
+    <script src="/js/superfish.min.js"></script>
+    <script src="/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/jquery.tabs.min.js"></script>
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <script src="/js/isotope.pkgd.min.js"></script>
+    <script src="/js/waypoints.min.js"></script>
+    <script src="/js/jquery.counterup.min.js"></script>
+    <script src="/js/simple-skillbar.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/mail-script.js"></script>
+    <script src="/js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script src="../js/login.js"></script>
+    <script src="/js/login.js"></script>
 
   </body>
 </html>
