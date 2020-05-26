@@ -1,0 +1,61 @@
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Set a style for the icon of each textbox */
+.icon {
+  padding: 10px;
+  background: #2F4F4F;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.input-field {
+  width: 80%;
+  padding: 5px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid white;
+}
+
+/* Set a style for the submit button */
+.btn_sign_up {
+  background-color: #228B22;
+  color: white;
+  padding: 20px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn_sign_up:hover {
+  opacity: 1;
+}
+
+/* buton continue for password*/
+.butp{
+  background-color:#22648B;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.login_wrapper{
+  padding-top: 200px;
+  margin: auto;
+  width: 500px;
+}
+
+.display_error_msg{
+  color:red
+}

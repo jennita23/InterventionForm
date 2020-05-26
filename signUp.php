@@ -1,12 +1,63 @@
 
+<?php
+include_once 'conn/dbconnect.php';
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zxx" class="no-js">
 <head>
+  <!-- Mobile Specific Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="img/fav.png">
+  <!-- Author Meta -->
+  <meta name="" content="">
+  <!-- Meta Description -->
+  <meta name="description" content="">
+  <!-- Meta Keyword -->
+  <meta name="keywords" content="">
+  <!-- meta character set -->
+  <meta charset="UTF-8">
+  <!-- Site Title -->
+  <title>Formulaire Intervention</title>
 
-  <link href="css/signUp.css" rel="stylesheet" type="text/css" />
-   <script src="js/signUp.js"></script>
-</head>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!--
+    CSS
+    ============================================= -->
+    <link href="css/login.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="css/signUp.css" rel="stylesheet" type="text/css" />
+     <script src="js/signUp.js"></script>
+
+  </head>
+  <body>
+    <header id="header">
+      <div class="container main-menu">
+        <div class="row align-items-center justify-content-between d-flex">
+          <div id="logo">
+            <a href="index.html"><img src="img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
+          </div>
+          <nav id="nav-menu-container">
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Acceuil</a></li>
+              <li active ><a href="signUp.php">S'inscrire</a></li>
+              <li><a href="login.html">Connexion</a></li>
+                </ul>
+          </nav><!-- #nav-menu-container -->
+        </div>
+      </div>
+    </header><!-- #header -->
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
   <div id="wrapper"></div>
@@ -17,6 +68,7 @@
       <h3 align="center" > S'inscrire </h3>
 
       <!-- form to register new user -->
+      <br>
 
       <form id='form_user'>
         <div class="input-container">
@@ -34,15 +86,10 @@
 
 
 
-        <div class="input-container signup_gender">
-          <span>Gender</span>
-          <input type="radio" name="gender" value="M"> Male
-          <input type="radio"  name="gender" value="F"> Female
-          <span class="display_error_msg" id="errorGender"></span >
-        </div>
+
 
         <div class="input-container">
-            Date de naissance : <input type="date"  id="birthday"  name="birthday">
+            Date de naissance : <input type="date"  id="birthday" style="width:500px;height:35px;" name="birthday">
               <span class="display_error_msg" id="errorBirthday"></span >
         </div>
 
@@ -68,11 +115,11 @@
 
         <div>
           <p id="text" style="color:#228B22;display:none" >You have agreed to the terms and conditions  !</p>
-          <a href="#">Terms and Conditions  </a>
+          <a href="#">J'accepte Termes et conditions  </a>
           <label><input type="checkbox" id="myCheck"  onclick="myFunction()"/> </label>
           <span class="display_error_msg"  id="errorBox"></span >
         </div>
-         <button type="button" class="btn_sign_up" onClick="verification()" id="ok"> S'incrire</button>
+         <button type="button" class="butp" onClick="verification()" id="ok"> S'incrire</button>
       </div>
 
     </form>
@@ -120,7 +167,24 @@
 
       </div>
     </div>
-
+    <script src="js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/easing.min.js"></script>
+    <script src="js/hoverIntent.js"></script>
+    <script src="js/superfish.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.tabs.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/simple-skillbar.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 </body>
 </html>
