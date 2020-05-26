@@ -74,13 +74,13 @@ include_once 'conn/dbconnect.php';
           <span class="display_error_msg" id="errorN"></span >
         <div class="input-container">
           <i class="fa fa-user icon"></i>
-          <input  class="input-field" type="text" id="nom" placeholder="Nom" name="fname">
+          <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom">
         </div>
 
-  <span class="display_error_msg"  id="errorL"></span >
+  <span class="display_error_msg"  id="errorP"></span >
         <div class="input-container">
           <i class="fa fa-user icon"></i>
-          <input  class="input-field" type="text"  id="prenom" placeholder="Prénom" name="lname">
+          <input  class="input-field" type="text"  id="prenom" placeholder="Prénom" name="prenom">
 
         </div>
 
@@ -101,7 +101,7 @@ include_once 'conn/dbconnect.php';
 
         </div>
 
-       <span class="display_error_msg" id="errorP"></span >
+       <span class="display_error_msg" id="errorpwd"></span >
         <div class="input-container">
           <i class="fa fa-key icon"></i>
           <input  class="input-field" type="password"  id="password" placeholder="Mot de passe " name="password">
@@ -113,6 +113,8 @@ include_once 'conn/dbconnect.php';
         <div class="input-container">
           <i class="fa fa-key icon"></i>
           <input class="input-field" type="password"  id="cpassword" placeholder="Confirmer mot de passe" name="cpassword">
+
+
         </div>
 
         <div>

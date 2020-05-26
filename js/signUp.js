@@ -19,9 +19,9 @@ function verification() {
   $('#password').css("border-color","#CCC");
   $('#cpassword').css("border-color","#CCC");
 
-
     if ( nom =="" || prenom ==""  || email  ==""  || birthday =="" || password =="" ||  cpassword=="")
        {
+
              //si le texttbox pour inserer lastname est vide
                if (nom == "")
 
@@ -59,7 +59,7 @@ function verification() {
 
               {
                   $('#password').css("border-color","#CF161E");
-                   document.getElementById('errorP').innerHTML = "*Vous devez insérer un mot de passe. ";
+                   document.getElementById('errorpwd').innerHTML = "*Vous devez insérer un mot de passe. ";
 
               }
 
@@ -67,7 +67,7 @@ function verification() {
 
 							{
 									$('#cpassword').css("border-color","#CF161E");
-									 document.getElementById('errorCP').innerHTML = "**Vous devez confirmer votre  mot de passe.  ";
+									 document.getElementById('errorCP').innerHTML = "*Vous devez confirmer votre  mot de passe.  ";
 
 							}
 
@@ -75,5 +75,10 @@ function verification() {
 
 
 
+
+
           }
+
+
+
        };
