@@ -1,7 +1,148 @@
 <?php
-include_once 'conn/dbconnect.php';
+// Include config file
+require_once "conn/config.php";
 
-?>
+// Define variables and initialize with empty values
+
+$nom = $prenom = $createdDate = $email = $equipement = $lab = $dept = $description = "";
+
+$errors = $errorn = $errorp = $errore = $errord = $errorEquip = $errorlab = $errorDept = $errorr = "";
+
+
+
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // Validate username
+    if(empty(trim($_POST["nom"]))){
+        $errorn = "*Vous devez insérer votre nom.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT studentID FROM student WHERE nom = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+            // Set parameters
+            $param_username = trim($_POST["nom"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $errorn = "";
+                } else{
+                    $nom = trim($_POST["nom"]);
+                }
+            } else{
+                echo "Oops! Quelque chose a mal tourné. Veuillez réessayer plus tard.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    if(empty(trim($_POST["sic"]))){
+        $errors = "*Vous devez insérer votre SIC No. ";
+    }
+    else{
+        $sic= trim($_POST["sic"]);
+    }
+
+
+    if(empty(trim($_POST["prenom"]))){
+        $errorp = "*Vous devez insérer votre prénom. ";
+    }
+    else{
+        $prenom= trim($_POST["prenom"]);
+    }
+
+    if(empty(trim($_POST["email"]))){
+        $errore = "*Vous devez insérer votre adresse Email UDM.";
+    }
+    else{
+        $email= trim($_POST["email"]);
+    }
+
+    if(empty(trim($_POST["createdDate"]))){
+        $errord = "*Vous devez insérer la date .  ";
+    }
+    else{
+        $createdDate = trim($_POST["createdDate"]);
+    }
+
+    if(empty(trim($_POST["equipement"]))){
+        $errorEquip = "*Vous devez spécifier l'équipement.";
+    }
+    else{
+        $equipement = trim($_POST["equipement"]);
+    }
+
+    if(empty(trim($_POST["lab"]))){
+        $errorlab = "*Vous devez spécifier le laboratoire.";
+    }
+    else{
+        $lab = trim($_POST["lab"]);
+    }
+
+    if(empty(trim($_POST["dept"]))){
+        $errorDept = "*Vous devez spécifier le departement  ";
+    }
+    else{
+        $dept= trim($_POST["dept"]);
+
+      }
+
+
+      if(empty(trim($_POST["description"]))){
+          $errorr = "*Vous devez donner une description du probleme. ";
+      }
+      else{
+          $description = trim($_POST["description"]);
+      }
+
+    // Check input errors before inserting in database
+    if(empty($errors) && empty($errorn) && empty($errorp) && empty($errore) && empty($errord) && empty($errorEquip) && empty($errorlab) && empty($errorDept) && empty($errorr)){
+
+        // Prepare an insert statement
+        $sql = "INSERT INTO student (sic, nom, prenom, email, createdDate, categorie, lab, dept, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "sssssssss",$param_sic,$param_username,$param_prenom,$param_email,$param_date,$param_equipement,$param_lab,$param_dept,$param_description);
+
+            // Set parameters
+            $param_sic= $sic;
+            $param_username = $nom;
+            $param_prenom =  $prenom;
+            $param_email = $email;
+            $param_date = $createdDate;
+            $param_equipement = $equipement;
+            $param_lab = $lab;
+            $param_dept = $dept;
+            $param_description = $description;
+
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to login page
+                header("location: dashboard.php");
+            } else{
+                echo "Quelque chose a mal tourné. Veuillez réessayer plus tard.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    // Close connection
+    mysqli_close($link);
+}
 
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">

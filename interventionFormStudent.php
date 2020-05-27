@@ -185,14 +185,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
           <div id="logo">
-            <a href="index.html"><img src="img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
+            <a href="dashboard.php"><img src="img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
           </div>
           <nav id="nav-menu-container">
 
             <ul class="nav-menu">
-                <li><a href="index.html">Acceuil</a></li>
+                <li><a href="dashboard.php">Mon profile</a></li>
               <li active ><a href="interventionFormStudent.php">Demande Intervention</a></li>
-              <li><a href="login.html">Connexion</a></li>
+              <li><a href="logout.php">Deconexion</a></li>
                 </ul>
           </nav>
         </div>
