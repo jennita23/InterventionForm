@@ -53,14 +53,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $password = trim($_POST["password"]);
     }
-
     // Validate confirm password
     if(empty(trim($_POST["cpassword"]))){
-        $error_CP = "Please confirm password.";
+        $errorCP = "Please confirm password.";
     } else{
         $cpassword = trim($_POST["cpassword"]);
         if(empty($errorpwd) && ($password != $cpassword)){
-            $cpassword = "Password did not match.";
+            $errorCP = "Password did not match.";
         }
     }
 
@@ -165,7 +164,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <!--  <form role="form"  method="POST"  accept-charset="UTF-8" onsubmit="return false">-->
           <!--<span class="display_error_msg" id="errorN"></span >-->
-        <div class="input-container <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+        <div class="input-container <?php echo (!empty($errorN)) ? 'has-error' : ''; ?>">
           <i class="fa fa-user icon"></i>
           <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" value="<?php echo $nom; ?>">
           <span class="help-block"><?php echo $errorN; ?></span>
@@ -177,8 +176,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           <input  class="input-field" type="text"  id="prenom" placeholder="Prénom" name="prenom">
 
         </div>
-
-
 
 
         <span class="display_error_msg" id="errord"></span >
