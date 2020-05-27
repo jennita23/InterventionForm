@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Validate username
     if(empty(trim($_POST["nom"]))){
-        $errorN = "Please enter a username.";
+        $errorN = "*Vous devez insérer votre nom.";
     } else{
         // Prepare a select statemen
         $sql = "SELECT id FROM users WHERE username = ?";
@@ -32,12 +32,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mysqli_stmt_store_result($stmt);
 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    $errorN = "This username is already taken.";
+                    $errorN = "Ce nom d'utilisateur est déjà pris.";
                 } else{
                     $nom = trim($_POST["nom"]);
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Oops! Quelque chose a mal tourné. Veuillez réessayer plus tard.";
             }
 
             // Close statement
@@ -47,39 +47,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Validate password
     if(empty(trim($_POST["password"]))){
-        $errorpwd = "Please enter a password.";
+        $errorpwd = "*Vous devez insérer un mot de passe. ";
     } elseif(strlen(trim($_POST["password"])) < 6){
-        $errorpwd = "Password must have atleast 6 characters.";
+        $errorpwd = "*Le mot de passe doit contenir au moins 6 caractères.";
     } else{
         $password = trim($_POST["password"]);
     }
     // Validate confirm password
     if(empty(trim($_POST["cpassword"]))){
-        $errorCP = "Please confirm password.";
+        $errorCP = "*Vous devez confirmer votre  mot de passe. ";
     } else{
         $cpassword = trim($_POST["cpassword"]);
         if(empty($errorpwd) && ($password != $cpassword)){
-            $errorCP = "Password did not match.";
+            $errorCP = "*Le mot de passe ne correspond pas.";
         }
     }
 
 
     if(empty(trim($_POST["prenom"]))){
-        $errorP = "Please enter prenom.";
+        $errorP = "*Vous devez insérer votre prénom. ";
     }
     else{
         $prenom= trim($_POST["prenom"]);
     }
 
     if(empty(trim($_POST["email"]))){
-        $errorE = "Please enter prenom.";
+        $errorE = "*Vous devez insérer votre adresse Email UDM.";
     }
     else{
         $email= trim($_POST["email"]);
     }
 
     if(empty(trim($_POST["dob"]))){
-        $errord = "Please enter prenom.";
+        $errord = "*Vous devez insérer votre date de naissance.  ";
     }
     else{
         $dob= trim($_POST["dob"]);
@@ -107,9 +107,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
+                //alert("Votre compte a été créé avec succès!");
                 header("location: login.php");
             } else{
-                echo "Something went wrong. Please try again later.";
+                echo "Quelque chose a mal tourné. Veuillez réessayer plus tard.";
             }
 
             // Close statement
@@ -189,52 +190,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <br>
 
    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-    <!--  <form role="form"  method="POST"  accept-charset="UTF-8" onsubmit="return false">-->
-          <!--<span class="display_error_msg" id="errorN"></span >-->
+     <span class="help-block" style='color:red;'><?php echo $errorN; ?></span>
         <div class="input-container <?php echo (!empty($errorN)) ? 'has-error' : ''; ?>">
           <i class="fa fa-user icon"></i>
           <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" value="<?php echo $nom; ?>">
-          <span class="help-block"><?php echo $errorN; ?></span>
         </div>
 
      <!--<span class="display_error_msg"  id="errorP"></span >-->
+     <span class="help-block" style='color:red;'><?php echo $errorP; ?></span>
         <div class="input-container <?php echo (!empty($errorP)) ? 'has-error' : ''; ?>">
           <i class="fa fa-user icon"></i>
           <input  class="input-field" type="text"  id="prenom" placeholder="Prénom" name="prenom" value="<?php echo $prenom; ?>">
-          <span class="help-block"><?php echo $errorP; ?></span>
         </div>
 
 
-        <span class="display_error_msg" id="errord"></span >
+       <span class="help-block" style='color:red;'><?php echo $errord; ?></span>
         <div class="input-container <?php echo (!empty($errord)) ? 'has-error' : ''; ?>">
             Date de naissance : <input type="date"  id="dob" style="width:500px;height:35px;" name="dob" value="<?php echo $dob; ?>">
-          <span class="help-block"><?php echo $errord; ?></span>
         </div>
 
 
-
+        <span class="help-block" style='color:red;'><?php echo $errorE; ?></span>
         <div class="input-container <?php echo (!empty($errorE)) ? 'has-error' : ''; ?>">
           <i class="fa fa-envelope icon"></i>
           <input  class="input-field"  id="email" type="text" placeholder="Adresse Email" name="email" value="<?php echo $email; ?>">
-            <span class="help-block"><?php echo $errorE; ?></span>
-
         </div>
 
-      <!-- <span class="display_error_msg" id="errorpwd"></span >-->
-        <div class="input-container <?php echo (!empty($errorpwd)) ? 'has-error' : ''; ?>">
 
+      <span class="help-block" style='color:red;'><?php echo $errorpwd; ?></span>
+        <div class="input-container <?php echo (!empty($errorpwd)) ? 'has-error' : ''; ?>">
           <i class="fa fa-key icon"></i>
           <input  class="input-field" type="password"  id="password" placeholder="Mot de passe " name="password" value="<?php echo $password; ?>">
-          <!--<span class="display_error_msg" id="errorConfirmPass"></span >-->
-             <span class="help-block"><?php echo $errorpwd; ?></span>
         </div>
 
 
-        <span class="display_error_msg" id="errorCP"></span >
+        <span class="help-block" style='color:red;'><?php echo $errorCP; ?></span>
         <div class="input-container <?php echo (!empty($errorCP)) ? 'has-error' : ''; ?>">
           <i class="fa fa-key icon"></i>
           <input class="input-field" type="password"  id="cpassword" placeholder="Confirmer mot de passe" name="cpassword" value="<?php echo $cpassword; ?>">
-          <span class="help-block"><?php echo $errorCP; ?></span>
       </div>
 
         <div>
