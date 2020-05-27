@@ -15,7 +15,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; }
     </style>
@@ -47,7 +47,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
           <ul class="nav-menu">
               <li active ><a href="dashboard.php">Mon profile</a></li>
-            <li><a href="interventionFormStudent.php">Demande Intervention</a></li>
+              <li class="menu-has-children"><a href="">Demande Intervention</a>
+                <ul>
+                  <li><a href="interventionFormTeacher.php">professeur</a></li>
+                  <li><a href="interventionFormStudent.php"> étudiants</a></li>
+                </ul>
+              </li>
             <li><a href="logout.php">Deconnexion</a></li>
               </ul>
         </nav><!-- #nav-menu-container -->
@@ -59,8 +64,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <h1>Welcome, <b><?php echo htmlspecialchars($_SESSION["email"]); ?></b></h1>
     </div>
     <p>
-        <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-        <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+
     </p>
 
 

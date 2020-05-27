@@ -1,8 +1,149 @@
 
-
 <?php
-include_once 'conn/dbconnect.php';
+// Include config file
+require_once "conn/config.php";
 
+// Define variables and initialize with empty values
+
+$sic = $nom = $prenom = $createdDate = $email = $equipement = $lab = $dept = $description = "";
+
+$errors = $errorn = $errorp = $errore = $errord = $errorEquip = $errorlab = $errorDept = $errorr = "";
+
+
+
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // Validate username
+    if(empty(trim($_POST["nom"]))){
+        $errorn = "*Vous devez insérer votre nom.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT studentID FROM student WHERE nom = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+            // Set parameters
+            $param_username = trim($_POST["nom"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $errorn = "";
+                } else{
+                    $nom = trim($_POST["nom"]);
+                }
+            } else{
+                echo "Oops! Quelque chose a mal tourné. Veuillez réessayer plus tard.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    if(empty(trim($_POST["sic"]))){
+        $errors = "*Vous devez insérer votre prénom. ";
+    }
+    else{
+        $sic= trim($_POST["sic"]);
+    }
+
+
+    if(empty(trim($_POST["prenom"]))){
+        $errorp = "*Vous devez insérer votre prénom. ";
+    }
+    else{
+        $prenom= trim($_POST["prenom"]);
+    }
+
+    if(empty(trim($_POST["email"]))){
+        $errore = "*Vous devez insérer votre adresse Email UDM.";
+    }
+    else{
+        $email= trim($_POST["email"]);
+    }
+
+    if(empty(trim($_POST["createdDate"]))){
+        $errord = "*Vous devez insérer votre date de naissance.  ";
+    }
+    else{
+        $createdDate = trim($_POST["createdDate"]);
+    }
+
+    if(empty(trim($_POST["equipement"]))){
+        $errorEquip = "*Vous devez insérer votre date de naissance.  ";
+    }
+    else{
+        $equipement = trim($_POST["equipement"]);
+    }
+
+    if(empty(trim($_POST["lab"]))){
+        $errorlab = "*Vous devez insérer votre date de naissance.  ";
+    }
+    else{
+        $lab = trim($_POST["lab"]);
+    }
+
+    if(empty(trim($_POST["dept"]))){
+        $errorDept = "*Vous devez insérer votre date de naissance.  ";
+    }
+    else{
+        $dept= trim($_POST["dept"]);
+
+      }
+
+
+      if(empty(trim($_POST["description"]))){
+          $errorr = "*Vous devez insérer votre date de naissance.  ";
+      }
+      else{
+          $description = trim($_POST["description"]);
+      }
+
+    // Check input errors before inserting in database
+    if(empty($errors) && empty($errorn) && empty($errorp) && empty($errore) && empty($errord) && empty($errorEquip) && empty($errorlab) && empty($errorDept) && empty($errorr)){
+
+        // Prepare an insert statement
+        $sql = "INSERT INTO student (sic, nom, prenom, email, createdDate, categorie, lab, dept, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "sssssssss",$param_sic,$param_username,$param_prenom,$param_email,$param_date,$param_equipement,$param_lab,$param_dept,$param_description);
+
+            // Set parameters
+            $param_sic= $sic;
+            $param_username = $nom;
+            $param_prenom =  $prenom;
+            $param_email = $email;
+            $param_date = $createdDate;
+            $param_equipement = $equipement;
+            $param_lab = $lab;
+            $param_dept = $dept;
+            $param_description = $description;
+
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to login page
+                header("location: dashboard.php");
+            } else{
+                echo "Quelque chose a mal tourné. Veuillez réessayer plus tard.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    // Close connection
+    mysqli_close($link);
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +181,7 @@ include_once 'conn/dbconnect.php';
 
   </head>
   <body>
-    <header id="header">
+    <!--<header id="header">
       <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
           <div id="logo">
@@ -53,14 +194,10 @@ include_once 'conn/dbconnect.php';
               <li active ><a href="interventionFormStudent.php">Demande Intervention</a></li>
               <li><a href="login.html">Connexion</a></li>
                 </ul>
-          </nav><!-- #nav-menu-container -->
+          </nav>-->
         </div>
       </div>
     </header><!-- #header -->
-
-
-
-
          <div class="login_wrapper">
 
          <!--  <form method="POST" action=""  > -->
@@ -71,7 +208,8 @@ include_once 'conn/dbconnect.php';
             <br>
    <div>
 
-       <form class="form-inline"  role="form"  method="POST"  accept-charset="UTF-8"  onsubmit="return false">
+ <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+       <!--<form class="form-inline"  role="form"  method="POST"  accept-charset="UTF-8"  onsubmit="return false">-->
           <!--Formulaire intervention etudiant-->
 
              <br>
@@ -83,20 +221,20 @@ include_once 'conn/dbconnect.php';
 
              <div class="form-group row flex-v-center">
               <div class="col-6 ">
-                <span class="display_error_msg" id="errors"></span>
-             <div class="input-container">
-
+                <!--<span class="display_error_msg" id="errors"></span>-->
+                 <span class="help-block" style='color:red;'><?php echo $errors; ?></span>
+             <div class="input-container <?php echo (!empty($errors)) ? 'has-error' : ''; ?>">
                <i class='far fa-address-card icon' style='font-size:15px'></i>
-               <input  class="input-field" type="text" id="sicStudent" placeholder="Sic No" name="sic" />
+               <input  class="input-field" type="text" id="sic" placeholder="Sic No" name="sic" value="<?php echo $sic; ?>"/>
 
              </div>
            </div>
 
              <div class="col-6">
-               <span class="display_error_msg" id="errorn"></span >
-             <div class="input-container">
+                <span class="help-block" style='color:red;'><?php echo $errorn; ?></span>
+             <div class="input-container <?php echo (!empty($errorn)) ? 'has-error' : ''; ?>">
                <i class="fa fa-user icon" style='font-size:15px'></i>
-               <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" />
+               <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" value="<?php echo $nom; ?>"/>
 
              </div>
            </div>
@@ -105,28 +243,28 @@ include_once 'conn/dbconnect.php';
              <br>
              <div class="form-group row flex-v-center">
               <div class="col-6 ">
-              <span class="display_error_msg" id="errorp"></span >
-             <div class="input-container">
+            <span class="help-block" style='color:red;'><?php echo $errorp; ?></span>
+             <div class="input-container <?php echo (!empty($errorp)) ? 'has-error' : ''; ?>">
                <i class="fa fa-user icon" style='font-size:15px'></i>
-               <input  class="input-field" type="text" id="prenom" placeholder="Prénom" name="prenom" />
+               <input  class="input-field" type="text" id="prenom" placeholder="Prénom" name="prenom" value="<?php echo $prenom; ?>" />
 
             </div>
           </div>
 
             <div class="col-6">
-             <span class="display_error_msg" id="errore"></span >
-             <div class="input-container">
+             <span class="help-block" style='color:red;'><?php echo $errore; ?></span>
+             <div class="input-container <?php echo (!empty($errore)) ? 'has-error' : ''; ?>">
                <i class="far fa-envelope icon " style='font-size:17px'></i>
-               <input  class="input-field" type="text" id="email" placeholder="Adresse Email UDM " name="email" />
+               <input  class="input-field" type="text" id="email" placeholder="Adresse Email UDM " name="email"  value="<?php echo $email; ?>" />
              </div>
            </div>
          </div>
 
 
-            <span class="display_error_msg" id="errord"></span >
-             <div class="input-container">
+            <span class="help-block" style='color:red;'><?php echo $errord; ?></span>
+             <div class="input-container <?php echo (!empty($errore)) ? 'has-error' : ''; ?>">
                <i class="fas fa-calendar-alt icon " style='font-size:17px'></i>
-               <input type="date"  style='width :287px' class="input-field"   id="date" name="date ">
+               <input type="date"  style='width :287px' class="input-field"   id="createdDate" name="createdDate" value="<?php echo $createdDate; ?>">
              </div>
 
              <br>
@@ -139,8 +277,8 @@ include_once 'conn/dbconnect.php';
             <div class="col">
 
               Catégorie de problème
-
-                  <select id="equipment" class="input-field">
+                  <div class="<?php echo (!empty($errorEquip)) ? 'has-error' : ''; ?>" >
+                  <select id="equipment" class="input-field" name="equipement" value="<?php echo $equipement; ?>">
                    <option value="">Choissez une catégorie ...</option>
                    <option value="Wifi">Wifi</option>
                    <option value="Projecteur">Projecteur</option>
@@ -150,28 +288,34 @@ include_once 'conn/dbconnect.php';
                    <option value="Autre">Autre</option>
 
                     </select>
+                    <span class="help-block" style='color:red;'><?php echo $errorEquip; ?></span>
                 </div>
         <br>
           <div class="col-6">
           Laboratoire concerné
-                     <select id="lab" class="input-field"  >
+          <div class="<?php echo (!empty($errorlab)) ? 'has-error' : ''; ?>" >
+                     <select id="lab" class="input-field" name="lab" value="<?php echo $lab; ?>" >
                        <option value="">Choissez une laboratoire </option>
                                   <option value="B105">B105</option>
                                   <option value="D21">D21</option>
                                   <option value="C21">C21</option>
                                   <option value="B214">B214</option>
                     </select>
+                      <span class="help-block" style='color:red;'><?php echo $errorlab; ?></span>
             </div>
 
               <div class="col-6">
+
             Département
-                    <select id="dept" class="input-field" >
+            <div class="<?php echo (!empty($errorDept)) ? 'has-error' : ''; ?>" >
+                    <select id="dept" class="input-field" name="dept" value="<?php echo $dept; ?>" >
                       <option value="">Choissez un département </option>
                             <option value="Informatique Appliquée">Informatique Appliquée</option>
                             <option value="Génie éléctrique">Génie éléctrique</option>
                             <option value="Génie éléctrique">Génie éléctrique</option>
                             <option value="Génie mécanique">Génie mécanique</option>
                     </select>
+                      <span class="help-block" style='color:red;'><?php echo $errorDept; ?></span>
                 </div>
               </div>
               <br>
@@ -179,12 +323,13 @@ include_once 'conn/dbconnect.php';
 
 
       <!-- textarea for remark -->
-       <span class="display_error_msg" id="errorr"></span >
-           <textarea class="form-control" style="font-size:14px;" rows="5"  cols="51" id="comment" placeholder="Énoncer brièvement le problème" ></textarea>
+       <span class="help-block" style='color:red;'><?php echo $errorr; ?></span>
+       <div class="<?php echo (!empty($errorr)) ? 'has-error' : ''; ?>" >
+           <textarea class="form-control" style="font-size:14px;" rows="5"  cols="51" id="description" placeholder="Énoncer brièvement le problème"  name="description" alue="<?php echo $description; ?>"></textarea>
 
         <br>
         <br>
-      <button type="submit" name="form1" id="form1" class="butp" onClick="verification()" id="ok">Soumettre une demande</button>
+      <button type="submit" name="form1" id="form1" class="butp" >Soumettre une demande</button>
 
              <div class="login_bottom">
 
