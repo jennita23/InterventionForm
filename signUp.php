@@ -9,6 +9,8 @@ $nom = $prenom = $dob = $email = $password = $cpassword = "";
 
 $errorN = $errorP = $errorE = $errord = $errorpwd = $errorCP = "";
 
+
+
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -107,7 +109,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                //alert("Votre compte a été créé avec succès!");
                 header("location: login.php");
             } else{
                 echo "Quelque chose a mal tourné. Veuillez réessayer plus tard.";
