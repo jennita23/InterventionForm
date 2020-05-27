@@ -72,11 +72,6 @@ function verification() {
 							}
 
 
-
-
-
-
-
           }
 
 

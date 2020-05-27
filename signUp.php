@@ -4,6 +4,41 @@ include_once 'conn/dbconnect.php';
 
 ?>
 
+<!-- register user -->
+<?php
+if (isset($_POST['signup'])) {
+$nom = mysqli_real_escape_string($con,$_POST['nom']);
+$prenom= mysqli_real_escape_string($con,$_POST['prenom']);
+$email = mysqli_real_escape_string($con,$_POST['email']);
+$password = mysqli_real_escape_string($con,$_POST['password']);
+$birthday = mysqli_real_escape_string($con,$_POST['birthday']);
+
+//INSERT Query
+$query = " INSERT INTO user (nom,prenom,email,password,birthday)
+VALUES ('$nom', '$prenom', '$email', '$password', '$birthday' ) ";
+$result = mysqli_query($con, $query);
+// echo $result;
+if( $result )
+{
+?>
+<script type="text/javascript">
+alert('Votre compte a ete creer avec succes !');
+
+</script>
+<?php
+}
+else
+{
+?>
+<script type="text/javascript">
+alert('Compte utilisateur existe deja.Veuillez creer un nouveau compte!');
+</script>
+<?php
+}
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
@@ -38,6 +73,92 @@ include_once 'conn/dbconnect.php';
     <link rel="stylesheet" href="css/main.css">
     <link href="css/signUp.css" rel="stylesheet" type="text/css" />
 
+<script language="javascript">
+function verification() {
+
+	var error = false;
+
+  var nom  = document.getElementById("nom").value;
+	var prenom = document.getElementById("prenom").value;
+	var email = document.getElementById("email").value;
+	var birthday = document.getElementById("birthday").value;
+  var password = document.getElementById("password").value;
+  var cpassword = document.getElementById("cpassword").value;
+
+
+	//re intialise les textbox
+
+  $('#nom').css("border-color","#CCC");
+	$('#prenom').css("border-color","#CCC");
+  $('#email').css("border-color","#CCC");
+	$('#birthday').css("border-color","#CCC");
+  $('#password').css("border-color","#CCC");
+  $('#cpassword').css("border-color","#CCC");
+
+    if ( nom =="" || prenom ==""  || email  ==""  || birthday =="" || password =="" ||  cpassword=="")
+       {
+
+             //si le texttbox pour inserer lastname est vide
+               if (nom == "")
+
+               {
+                   $('#nom').css("border-color","#CF161E");
+                    document.getElementById('errorN').innerHTML = "*Vous devez insérer votre nom. ";
+                   error = true;
+               }
+
+							 if (prenom == "")
+
+               {
+                   $('#prenom').css("border-color","#CF161E");
+                    document.getElementById('errorP').innerHTML = "*Vous devez insérer votre prénom. ";
+
+               }
+
+							 if (email== "")
+
+							 {
+									 $('#email').css("border-color","#CF161E");
+										document.getElementById('errorE').innerHTML = "*Vous devez insérer votre adresse Email UDM. ";
+
+							 }
+
+							 if (birthday== "")
+
+							 {
+									 $('#birthday').css("border-color","#CF161E");
+										document.getElementById('errord').innerHTML = "*Vous devez insérer votre date de naissance.  ";
+
+							 }
+
+               if (password== "")
+
+              {
+                  $('#password').css("border-color","#CF161E");
+                   document.getElementById('errorpwd').innerHTML = "*Vous devez insérer un mot de passe. ";
+
+              }
+
+							 if (cpassword== "")
+
+							{
+									$('#cpassword').css("border-color","#CF161E");
+									 document.getElementById('errorCP').innerHTML = "*Vous devez confirmer votre  mot de passe.  ";
+
+							}
+
+
+          }
+
+
+					if (!password.match(cpassword)) {
+							document.getElementById('errorConfirmPass').innerHTML = "*Le mot de passe ne correspond pas.";
+							error = true;
+						}
+
+
+       };
+</script>
 
   </head>
   <body>
@@ -69,8 +190,8 @@ include_once 'conn/dbconnect.php';
 
       <!-- form to register new user -->
       <br>
-
-      <form role="form"  method="POST"  accept-charset="UTF-8" onsubmit="return false">
+ <form action="<?php $_PHP_SELF ?>"  method="POST" accept-charset="utf-8" class="form" role="form" onSubmit="return verification();">
+    <!--  <form role="form"  method="POST"  accept-charset="UTF-8" onsubmit="return false">-->
           <span class="display_error_msg" id="errorN"></span >
         <div class="input-container">
           <i class="fa fa-user icon"></i>
@@ -121,7 +242,8 @@ include_once 'conn/dbconnect.php';
           <label><input type="checkbox" id="myCheck"  onclick="myFunction()"/></label>
           <span class="display_error_msg"  id="errorBox"></span >
         </div>
-          <button type="submit" name="form2" id="form2" class="butp" onClick="verification()" id="ok">S'incrire</button>
+          <!--<button type="submit" name="signup" id="signup" class="butp" onClick="verification()" id="ok">S'incrire</button>-->
+            <button type="submit" name="signup" id="signup" class="butp" >S'incrire</button>
 
       </div>
 
@@ -129,47 +251,8 @@ include_once 'conn/dbconnect.php';
 <br>
 <br>
 
-  <!-- Modal -->
-   <div class="modal fade" id="modalUserregistraion" role="dialog">
-     <div class="modal-dialog">
 
-       <!-- Modal content-->
-       <div class="modal-content">
-         <div class="modal-header">
-           <button type="button" class="close" data-dismiss="modal">&times;</button>
-           <h4 class="modal-title">User registration</h4>
-         </div>
-         <div class="modal-body">
-           <p>Account created successfully.<br/> Please check your email address: rishan@test.com to activate your account.</p>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         </div>
-       </div>
 
-     </div>
-   </div>
-
-   <!-- Modal -->
-    <div class="modal fade" id="modalUserregistraionError" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Demande inscription</h4>
-          </div>
-          <div class="modal-body">
-            <p style="color: red;">An error occured please try again.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
