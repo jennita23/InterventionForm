@@ -48,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty(trim($_POST["sic"]))){
-        $errors = "*Vous devez insérer votre prénom. ";
+        $errors = "*Vous devez insérer votre SIC No. ";
     }
     else{
         $sic= trim($_POST["sic"]);
@@ -70,28 +70,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty(trim($_POST["createdDate"]))){
-        $errord = "*Vous devez insérer votre date de naissance.  ";
+        $errord = "*Vous devez insérer la date .  ";
     }
     else{
         $createdDate = trim($_POST["createdDate"]);
     }
 
     if(empty(trim($_POST["equipement"]))){
-        $errorEquip = "*Vous devez insérer votre date de naissance.  ";
+        $errorEquip = "*Vous devez spécifier l'équipement.";
     }
     else{
         $equipement = trim($_POST["equipement"]);
     }
 
     if(empty(trim($_POST["lab"]))){
-        $errorlab = "*Vous devez insérer votre date de naissance.  ";
+        $errorlab = "*Vous devez spécifier le laboratoire.";
     }
     else{
         $lab = trim($_POST["lab"]);
     }
 
     if(empty(trim($_POST["dept"]))){
-        $errorDept = "*Vous devez insérer votre date de naissance.  ";
+        $errorDept = "*Vous devez spécifier le departement  ";
     }
     else{
         $dept= trim($_POST["dept"]);
@@ -100,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
       if(empty(trim($_POST["description"]))){
-          $errorr = "*Vous devez insérer votre date de naissance.  ";
+          $errorr = "*Vous devez donner une description du probleme. ";
       }
       else{
           $description = trim($_POST["description"]);
@@ -181,7 +181,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   </head>
   <body>
-    <!--<header id="header">
+    <header id="header">
       <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
           <div id="logo">
@@ -194,7 +194,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <li active ><a href="interventionFormStudent.php">Demande Intervention</a></li>
               <li><a href="login.html">Connexion</a></li>
                 </ul>
-          </nav>-->
+          </nav>
         </div>
       </div>
     </header><!-- #header -->
@@ -266,18 +266,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                <i class="fas fa-calendar-alt icon " style='font-size:17px'></i>
                <input type="date"  style='width :287px' class="input-field"   id="createdDate" name="createdDate" value="<?php echo $createdDate; ?>">
              </div>
-
              <br>
              <div>
                  <br>
               <h4 align="center"> Demande  Intervention </h4>
               <br>
 
-       <div class="row">
+           <div class="row">
             <div class="col">
-
               Catégorie de problème
-                  <div class="<?php echo (!empty($errorEquip)) ? 'has-error' : ''; ?>" >
+                <span class="help-block" style='color:red;'><?php echo $errorEquip; ?></span>
                   <select id="equipment" class="input-field" name="equipement" value="<?php echo $equipement; ?>">
                    <option value="">Choissez une catégorie ...</option>
                    <option value="Wifi">Wifi</option>
@@ -286,14 +284,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                    <option value="PC">PC</option>
                    <option value="OS">OS (Window,Linux)</option>
                    <option value="Autre">Autre</option>
-
                     </select>
-                    <span class="help-block" style='color:red;'><?php echo $errorEquip; ?></span>
                 </div>
         <br>
           <div class="col-6">
           Laboratoire concerné
-          <div class="<?php echo (!empty($errorlab)) ? 'has-error' : ''; ?>" >
+            <span class="help-block" style='color:red;'><?php echo $errorlab; ?></span>
                      <select id="lab" class="input-field" name="lab" value="<?php echo $lab; ?>" >
                        <option value="">Choissez une laboratoire </option>
                                   <option value="B105">B105</option>
@@ -301,13 +297,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                   <option value="C21">C21</option>
                                   <option value="B214">B214</option>
                     </select>
-                      <span class="help-block" style='color:red;'><?php echo $errorlab; ?></span>
+
             </div>
 
               <div class="col-6">
-
             Département
-            <div class="<?php echo (!empty($errorDept)) ? 'has-error' : ''; ?>" >
+              <span class="help-block" style='color:red;'><?php echo $errorDept; ?></span>
                     <select id="dept" class="input-field" name="dept" value="<?php echo $dept; ?>" >
                       <option value="">Choissez un département </option>
                             <option value="Informatique Appliquée">Informatique Appliquée</option>
@@ -315,12 +310,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <option value="Génie éléctrique">Génie éléctrique</option>
                             <option value="Génie mécanique">Génie mécanique</option>
                     </select>
-                      <span class="help-block" style='color:red;'><?php echo $errorDept; ?></span>
+
                 </div>
               </div>
               <br>
-
-
 
       <!-- textarea for remark -->
        <span class="help-block" style='color:red;'><?php echo $errorr; ?></span>

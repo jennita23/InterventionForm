@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
     // Check input errors before inserting in database
-    if(empty($errorN) && empty($errorP) && empty($errorpwd) && empty($errorCP)){
+    if(empty($errorN) && empty($errorP) && empty($errorpwd) && empty($errorCP) ){
 
         // Prepare an insert statement
         $sql = "INSERT INTO users (username, password, prenom, email, dob) VALUES (?, ?, ?, ?, ?)";
