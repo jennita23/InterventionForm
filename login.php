@@ -1,7 +1,91 @@
-
 <?php
-include_once 'conn/dbconnect.php';
+// Initialize the session
+session_start();
 
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: dashboard.php");
+    exit;
+}
+
+// Include config file
+require_once "conn/config.php";
+
+// Define variables and initialize with empty values
+$email = $password = "";
+$errorE = $errorpwd= "";
+
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // Check if username is empty
+    if(empty(trim($_POST["email"]))){
+        $errorE = "*Vous devez insérer votre adresse email.";
+    } else{
+        $email = trim($_POST["email"]);
+    }
+
+    // Check if password is empty
+    if(empty(trim($_POST["password"]))){
+        $errorpwd = "*Vous devez insérer un mot de passe. ";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+
+    // Validate credentials
+    if(empty($errorE) && empty($errorpwd)){
+        // Prepare a select statement
+        $sql = "SELECT id, email, password FROM users WHERE email = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+            // Set parameters
+            $param_email = $email;
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Store result
+                mysqli_stmt_store_result($stmt);
+
+                // Check if username exists, if yes then verify password
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    // Bind result variables
+                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
+                    if(mysqli_stmt_fetch($stmt)){
+                        if(password_verify($password, $hashed_password)){
+                            // Password is correct, so start a new session
+                            session_start();
+
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["email"] = $email;
+
+                            // Redirect user to welcome page
+                            header("location: dashboard.php");
+                        } else{
+                            // Display an error message if password is not valid
+                            $errorpwd = "*Le mot de passe que vous avez entré n'est pas valide.";
+                        }
+                    }
+                } else{
+                    // Display an error message if username doesn't exist
+                    $errorE= "*Aucun compte trouvé avec cette adresse e-mail.";
+                }
+            } else{
+                echo "Oops! Quelque chose a mal tourné. Veuillez réessayer plus tard.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    // Close connection
+    mysqli_close($link);
+}
 ?>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -66,22 +150,23 @@ include_once 'conn/dbconnect.php';
 
       <!--  <form method="POST" action=""  > -->
 
-    <form class="form" role="form" method="POST" accept-charset="UTF-8" onsubmit="return false">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
           <h3 align="center">  LOGIN </h3>
+          <p>Veuillez saisir vos identifiants pour vous connecter.</p>
+          <br>
            <div  class="display_error_msg" id="message" > </div>
              <br>
 
-            <span class="display_error_msg" id="errorE"></span >
-          <div class="input-container">
+            <!--<span class="display_error_msg" id="errorE"></span >-->
+            <span class="help-block" style='color:red;'><?php echo $errorE; ?></span>
+          <div class="input-container <?php echo (!empty($errorE)) ? 'has-error' : ''; ?>">
             <i class="fa fa-user icon"></i>
-            <input  class="input-field" type="text" id="email"  placeholder="Adresse Email " name="email_tech" />
-
-
+            <input  class="input-field" type="text" id="email"  placeholder="Adresse Email " name="email" value="<?php echo $email; ?>" />
           </div>
 
-      <span class="display_error_msg" id="errorpass"></span >
-          <div class="input-container">
+      <span class="help-block" style='color:red;'><?php echo $errorpwd; ?></span>
+          <div class="input-container <?php echo (!empty($errorpwd)) ? 'has-error' : ''; ?>">
             <i class="fa fa-key icon"></i>
             <input  class="input-field" type="password"  id="password"  placeholder="Mot de passe" name="password"  />
 
