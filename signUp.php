@@ -5,7 +5,7 @@ require_once "conn/config.php";
 
 // Define variables and initialize with empty values
 
-$nom = $prenom = $birthday = $email = $password = $cpassword = "";
+$nom = $prenom = $dob = $email = $password = $cpassword = "";
 
 $errorN = $errorP = $errorE = $errord = $errorpwd = $errorCP = "";
 
@@ -63,19 +63,46 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 
+
+    if(empty(trim($_POST["prenom"]))){
+        $errorP = "Please enter prenom.";
+    }
+    else{
+        $prenom= trim($_POST["prenom"]);
+    }
+
+    if(empty(trim($_POST["email"]))){
+        $errorE = "Please enter prenom.";
+    }
+    else{
+        $email= trim($_POST["email"]);
+    }
+
+    if(empty(trim($_POST["dob"]))){
+        $errord = "Please enter prenom.";
+    }
+    else{
+        $dob= trim($_POST["dob"]);
+    }
+
+
+
     // Check input errors before inserting in database
-    if(empty($errorN) && empty($errorpwd) && empty($errorCP)){
+    if(empty($errorN) && empty($errorP) && empty($errorpwd) && empty($errorCP)){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (username, password, prenom, email, dob) VALUES (?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password,$param_prenom,$param_email,$param_dob);
 
             // Set parameters
             $param_username = $nom;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_prenom =  $prenom;
+            $param_email = $email;
+            $param_dob = $dob;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -170,25 +197,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           <span class="help-block"><?php echo $errorN; ?></span>
         </div>
 
-  <span class="display_error_msg"  id="errorP"></span >
-        <div class="input-container">
+     <!--<span class="display_error_msg"  id="errorP"></span >-->
+        <div class="input-container <?php echo (!empty($errorP)) ? 'has-error' : ''; ?>">
           <i class="fa fa-user icon"></i>
-          <input  class="input-field" type="text"  id="prenom" placeholder="Prénom" name="prenom">
-
+          <input  class="input-field" type="text"  id="prenom" placeholder="Prénom" name="prenom" value="<?php echo $prenom; ?>">
+          <span class="help-block"><?php echo $errorP; ?></span>
         </div>
 
 
         <span class="display_error_msg" id="errord"></span >
-        <div class="input-container">
-            Date de naissance : <input type="date"  id="birthday" style="width:500px;height:35px;" name="birthday">
-        <span class="display_error_msg" id="errord"></span >
+        <div class="input-container <?php echo (!empty($errord)) ? 'has-error' : ''; ?>">
+            Date de naissance : <input type="date"  id="dob" style="width:500px;height:35px;" name="dob" value="<?php echo $dob; ?>">
+          <span class="help-block"><?php echo $errord; ?></span>
         </div>
 
 
-        <span class="display_error_msg" id="errorE"></span >
-        <div class="input-container">
+
+        <div class="input-container <?php echo (!empty($errorE)) ? 'has-error' : ''; ?>">
           <i class="fa fa-envelope icon"></i>
-          <input  class="input-field"  id="email" type="text" placeholder="Adresse Email" name="email">
+          <input  class="input-field"  id="email" type="text" placeholder="Adresse Email" name="email" value="<?php echo $email; ?>">
+            <span class="help-block"><?php echo $errorE; ?></span>
 
         </div>
 
