@@ -1,41 +1,98 @@
 
 <?php
-include_once 'conn/dbconnect.php';
+// Include config file
+require_once "conn/config.php";
 
-?>
+// Define variables and initialize with empty values
 
-<!-- register user -->
-<?php
-if (isset($_POST['signup'])) {
-$nom = mysqli_real_escape_string($con,$_POST['nom']);
-$prenom= mysqli_real_escape_string($con,$_POST['prenom']);
-$email = mysqli_real_escape_string($con,$_POST['email']);
-$password = mysqli_real_escape_string($con,$_POST['password']);
-$birthday = mysqli_real_escape_string($con,$_POST['birthday']);
+$nom = $prenom = $birthday = $email = $password = $cpassword = "";
 
-//INSERT Query
-$query = " INSERT INTO user (nom,prenom,email,password,birthday)
-VALUES ('$nom', '$prenom', '$email', '$password', '$birthday' ) ";
-$result = mysqli_query($con, $query);
-// echo $result;
-if( $result )
-{
-?>
-<script type="text/javascript">
-alert('Votre compte a ete creer avec succes !');
+$errorN = $errorP = $errorE = $errord = $errorpwd = $errorCP = "";
 
-</script>
-<?php
-}
-else
-{
-?>
-<script type="text/javascript">
-alert('Compte utilisateur existe deja.Veuillez creer un nouveau compte!');
-</script>
-<?php
-}
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    // Validate username
+    if(empty(trim($_POST["nom"]))){
+        $errorN = "Please enter a username.";
+    } else{
+        // Prepare a select statemen
+        $sql = "SELECT id FROM users WHERE username = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+            // Set parameters
+            $param_username = trim($_POST["nom"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $errorN = "This username is already taken.";
+                } else{
+                    $nom = trim($_POST["nom"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    // Validate password
+    if(empty(trim($_POST["password"]))){
+        $errorpwd = "Please enter a password.";
+    } elseif(strlen(trim($_POST["password"])) < 6){
+        $errorpwd = "Password must have atleast 6 characters.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+
+    // Validate confirm password
+    if(empty(trim($_POST["cpassword"]))){
+        $error_CP = "Please confirm password.";
+    } else{
+        $cpassword = trim($_POST["cpassword"]);
+        if(empty($errorpwd) && ($password != $cpassword)){
+            $cpassword = "Password did not match.";
+        }
+    }
+
+    // Check input errors before inserting in database
+    if(empty($errorN) && empty($errorpwd) && empty($errorCP)){
+
+        // Prepare an insert statement
+        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+
+            // Set parameters
+            $param_username = $nom;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to login page
+                header("location: login.php");
+            } else{
+                echo "Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    // Close connection
+    mysqli_close($link);
 }
 ?>
 
@@ -73,92 +130,6 @@ alert('Compte utilisateur existe deja.Veuillez creer un nouveau compte!');
     <link rel="stylesheet" href="css/main.css">
     <link href="css/signUp.css" rel="stylesheet" type="text/css" />
 
-<script language="javascript">
-function verification() {
-
-	var error = false;
-
-  var nom  = document.getElementById("nom").value;
-	var prenom = document.getElementById("prenom").value;
-	var email = document.getElementById("email").value;
-	var birthday = document.getElementById("birthday").value;
-  var password = document.getElementById("password").value;
-  var cpassword = document.getElementById("cpassword").value;
-
-
-	//re intialise les textbox
-
-  $('#nom').css("border-color","#CCC");
-	$('#prenom').css("border-color","#CCC");
-  $('#email').css("border-color","#CCC");
-	$('#birthday').css("border-color","#CCC");
-  $('#password').css("border-color","#CCC");
-  $('#cpassword').css("border-color","#CCC");
-
-    if ( nom =="" || prenom ==""  || email  ==""  || birthday =="" || password =="" ||  cpassword=="")
-       {
-
-             //si le texttbox pour inserer lastname est vide
-               if (nom == "")
-
-               {
-                   $('#nom').css("border-color","#CF161E");
-                    document.getElementById('errorN').innerHTML = "*Vous devez insérer votre nom. ";
-                   error = true;
-               }
-
-							 if (prenom == "")
-
-               {
-                   $('#prenom').css("border-color","#CF161E");
-                    document.getElementById('errorP').innerHTML = "*Vous devez insérer votre prénom. ";
-
-               }
-
-							 if (email== "")
-
-							 {
-									 $('#email').css("border-color","#CF161E");
-										document.getElementById('errorE').innerHTML = "*Vous devez insérer votre adresse Email UDM. ";
-
-							 }
-
-							 if (birthday== "")
-
-							 {
-									 $('#birthday').css("border-color","#CF161E");
-										document.getElementById('errord').innerHTML = "*Vous devez insérer votre date de naissance.  ";
-
-							 }
-
-               if (password== "")
-
-              {
-                  $('#password').css("border-color","#CF161E");
-                   document.getElementById('errorpwd').innerHTML = "*Vous devez insérer un mot de passe. ";
-
-              }
-
-							 if (cpassword== "")
-
-							{
-									$('#cpassword').css("border-color","#CF161E");
-									 document.getElementById('errorCP').innerHTML = "*Vous devez confirmer votre  mot de passe.  ";
-
-							}
-
-
-          }
-
-
-					if (!password.match(cpassword)) {
-							document.getElementById('errorConfirmPass').innerHTML = "*Le mot de passe ne correspond pas.";
-							error = true;
-						}
-
-
-       };
-</script>
 
   </head>
   <body>
@@ -190,12 +161,14 @@ function verification() {
 
       <!-- form to register new user -->
       <br>
- <form action="<?php $_PHP_SELF ?>"  method="POST" accept-charset="utf-8" class="form" role="form" onSubmit="return verification();">
+
+   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <!--  <form role="form"  method="POST"  accept-charset="UTF-8" onsubmit="return false">-->
-          <span class="display_error_msg" id="errorN"></span >
-        <div class="input-container">
+          <!--<span class="display_error_msg" id="errorN"></span >-->
+        <div class="input-container <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
           <i class="fa fa-user icon"></i>
-          <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom">
+          <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" value="<?php echo $nom; ?>">
+          <span class="help-block"><?php echo $errorN; ?></span>
         </div>
 
   <span class="display_error_msg"  id="errorP"></span >
@@ -222,18 +195,21 @@ function verification() {
 
         </div>
 
-       <span class="display_error_msg" id="errorpwd"></span >
-        <div class="input-container">
+      <!-- <span class="display_error_msg" id="errorpwd"></span >-->
+        <div class="input-container <?php echo (!empty($errorpwd)) ? 'has-error' : ''; ?>">
+
           <i class="fa fa-key icon"></i>
-          <input  class="input-field" type="password"  id="password" placeholder="Mot de passe " name="password">
-          <span class="display_error_msg" id="errorConfirmPass"></span >
+          <input  class="input-field" type="password"  id="password" placeholder="Mot de passe " name="password" value="<?php echo $password; ?>">
+          <!--<span class="display_error_msg" id="errorConfirmPass"></span >-->
+             <span class="help-block"><?php echo $errorpwd; ?></span>
         </div>
 
 
         <span class="display_error_msg" id="errorCP"></span >
-        <div class="input-container">
+        <div class="input-container <?php echo (!empty($errorCP)) ? 'has-error' : ''; ?>">
           <i class="fa fa-key icon"></i>
-          <input class="input-field" type="password"  id="cpassword" placeholder="Confirmer mot de passe" name="cpassword">
+          <input class="input-field" type="password"  id="cpassword" placeholder="Confirmer mot de passe" name="cpassword" value="<?php echo $cpassword; ?>">
+          <span class="help-block"><?php echo $errorCP; ?></span>
       </div>
 
         <div>
