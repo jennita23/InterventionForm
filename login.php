@@ -130,7 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           <nav id="nav-menu-container">
 
             <ul class="nav-menu">
-                <li><a href="/index.html">Acceuil</a></li>
+                <li><a href="index.html">Acceuil</a></li>
 
               <li active ><a href="login.php">Connexion</a></li>
                 <li active ><a href="signUp.php">S'inscrire</a></li>
