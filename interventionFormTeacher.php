@@ -182,18 +182,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           <nav id="nav-menu-container">
 
             <ul class="nav-menu">
-              <li><a href="index.html">Acceuil</a></li>
+              <li active><a href="dashboard.php">Mon profile</a></li>
                 <li active ><a href="interventionFormTeacher.html">Demande Intervention</a></li>
 
-              <li active ><a href="login.html">Connexion</a></li>
-
-
-
-
+                <li><a href="logout.php">Deconexion</a></li>
                 </ul>
-
-
-
           </nav><!-- #nav-menu-container -->
         </div>
       </div>
