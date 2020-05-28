@@ -318,7 +318,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <!-- textarea for remark -->
        <span class="help-block" style='color:red;'><?php echo $errorr; ?></span>
        <div class="<?php echo (!empty($errorr)) ? 'has-error' : ''; ?>" >
-           <textarea class="form-control" style="font-size:14px;" rows="5"  cols="51" id="description" placeholder="Énoncer brièvement le problème"  name="description" alue="<?php echo $description; ?>"></textarea>
+           <textarea class="form-control" style="font-size:14px;" rows="5"  cols="51" id="description" placeholder="Énoncer brièvement le problème"  name="description" value="<?php echo $description; ?>"></textarea>
 
         <br>
         <br>

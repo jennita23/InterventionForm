@@ -4,9 +4,9 @@ require_once "conn/config.php";
 
 // Define variables and initialize with empty values
 
-$nom = $prenom = $createdDate = $email = $equipement = $lab = $dept = $description = "";
+ $nom = $prenom = $email = $createdDate  = $equipment = $categorie = $localisation = $description = "";
 
-$errors = $errorn = $errorp = $errore = $errord = $errorEquip = $errorlab = $errorDept = $errorr = "";
+$errorn = $errorp = $errore = $errord = $errorEquip = $errorC = $errorL = $errorr = "";
 
 
 
@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $errorn = "*Vous devez insérer votre nom.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT studentID FROM student WHERE nom = ?";
+        $sql = "SELECT teacherID FROM teacher WHERE nom = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -46,12 +46,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 
-    if(empty(trim($_POST["sic"]))){
-        $errors = "*Vous devez insérer votre SIC No. ";
-    }
-    else{
-        $sic= trim($_POST["sic"]);
-    }
 
 
     if(empty(trim($_POST["prenom"]))){
@@ -75,25 +69,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $createdDate = trim($_POST["createdDate"]);
     }
 
-    if(empty(trim($_POST["equipement"]))){
+    if(empty(trim($_POST["equipment"]))){
         $errorEquip = "*Vous devez spécifier l'équipement.";
     }
     else{
-        $equipement = trim($_POST["equipement"]);
+        $equipment = trim($_POST["equipment"]);
     }
 
-    if(empty(trim($_POST["lab"]))){
-        $errorlab = "*Vous devez spécifier le laboratoire.";
+    if(empty(trim($_POST["categorie"]))){
+        $errorC = "*Vous devez spécifier le catégorie.";
     }
     else{
-        $lab = trim($_POST["lab"]);
+        $categorie= trim($_POST["categorie"]);
     }
 
-    if(empty(trim($_POST["dept"]))){
-        $errorDept = "*Vous devez spécifier le departement  ";
+    if(empty(trim($_POST["localisation"]))){
+        $errorL = "*Vous devez spécifier le departement";
     }
     else{
-        $dept= trim($_POST["dept"]);
+        $localisation= trim($_POST["localisation"]);
 
       }
 
@@ -106,24 +100,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       }
 
     // Check input errors before inserting in database
-    if(empty($errors) && empty($errorn) && empty($errorp) && empty($errore) && empty($errord) && empty($errorEquip) && empty($errorlab) && empty($errorDept) && empty($errorr)){
+    if(empty($errorn) && empty($errorp) && empty($errore) && empty($errord) && empty($errorEquip) && empty($errorC) && empty($errorL) && empty($errorr)){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO student (sic, nom, prenom, email, createdDate, categorie, lab, dept, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO teacher ( nom, prenom, email, createdDate, equipment, categorie, localisation, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssssssss",$param_sic,$param_username,$param_prenom,$param_email,$param_date,$param_equipement,$param_lab,$param_dept,$param_description);
+            mysqli_stmt_bind_param($stmt, "ssssssss",$param_username,$param_prenom,$param_email,$param_date,$param_equipement,$param_cat,$param_loc,$param_description);
 
             // Set parameters
-            $param_sic= $sic;
+
             $param_username = $nom;
             $param_prenom =  $prenom;
             $param_email = $email;
             $param_date = $createdDate;
-            $param_equipement = $equipement;
-            $param_lab = $lab;
-            $param_dept = $dept;
+            $param_equipement = $equipment;
+            $param_cat = $categorie;
+            $param_loc = $localisation;
             $param_description = $description;
 
 
@@ -143,6 +137,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     mysqli_close($link);
 }
+?>
 
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -212,7 +207,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          <!--forulaire de demane intervention etudiant-->
             <h3 align="center" style="color:grey;"> Formulaire de demande d'intervention technique </h3>
             <br>
-       <form class="form-inline"  role="form" method="POST" accept-charset="UTF-8" onsubmit="return false">
+
+         <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
           <!--Formulaire intervention etudiant-->
             <div  class="display_error_msg" id="message" > </div>
@@ -223,43 +219,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
              <div class="form-group row flex-v-center">
               <div class="col-6 ">
-           <span class="display_error_msg" id="errorN"></span >
-             <div class="input-container">
+             <span class="help-block" style='color:red;'><?php echo $errorn; ?></span>
+             <div class="input-container  <?php echo (!empty($errorn)) ? 'has-error' : ''; ?>">
                <i class="fa fa-user icon" style='font-size:15px'></i>
-               <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" />
+               <input  class="input-field" type="text" id="nom" placeholder="Nom" name="nom" value="<?php echo $nom; ?>"/>
              </div>
            </div>
 
 
 
          <div class="col-6 ">
-           <span class="display_error_msg" id="errorP"></span >
-             <div class="input-container">
+           <span class="help-block" style='color:red;'><?php echo $errorp; ?></span>
+            <div class="input-container <?php echo (!empty($errorp)) ? 'has-error' : ''; ?>">
                <i class="fa fa-user icon" style='font-size:15px'></i>
-               <input  class="input-field" type="text" id="prenom" placeholder="Prénom" name="prenom" />
-
+               <input  class="input-field" type="text" id="prenom" placeholder="Prénom" name="prenom"  value="<?php echo $prenom; ?>"/>
              </div>
              </div>
              </div>
-
 
 
           <div class="form-group row flex-v-center">
           <div class="col">
-            <span class="display_error_msg" id="errorE"></span >
-             <div class="input-container">
+            <span class="help-block" style='color:red;'><?php echo $errore; ?></span>
+            <div class="input-container <?php echo (!empty($errore)) ? 'has-error' : ''; ?>">
                <i class="far fa-envelope icon " style='font-size:17px'></i>
-               <input  class="input-field" type="text" id="email" placeholder="Adresse Email UDM " name="email" />
+               <input  class="input-field" type="text" id="email" placeholder="Adresse Email UDM " name="email" value="<?php echo $email; ?>" />
             </div>
         </div>
 
 
 
        <div class="col">
-            <span class="display_error_msg" id="errord"></span >
-             <div class="input-container">
+            <span class="help-block" style='color:red;'><?php echo $errord; ?></span>
+             <div class="input-container <?php echo (!empty($errord)) ? 'has-error' : ''; ?>">
                <i class="fas fa-calendar-alt icon " style='font-size:17px'></i>
-               <input type="date"  class="input-field"   id="date" name="date ">
+               <input type="date"  class="input-field"   id="createdDate" name="createdDate" value="<?php echo $createdDate; ?>">
 
              </div>
             </div>
@@ -273,7 +267,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <div class="row">
                 <div class="col-6">
               Détails de l'équipement
-               <select id="equipment" class="input-field" >
+                <span class="help-block" style='color:red;'><?php echo $errorEquip; ?></span>
+              <div class="<?php echo (!empty($errorEquip)) ? 'has-error' : ''; ?>">
+               <select id="equipment" class="input-field" name="equipment" value="<?php echo $equipment; ?>">
                    <option value="">Choissez l'équipement</option>
                    <option value="PC">PC</option>
                    <option value="Laptop">Laptop</option>
@@ -289,11 +285,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <option value="Imprimantes">Imprimantes</option>
                     <option value="Renouvellement de la cartouche">Renouvellement de la cartouche</option>
                     </select>
+                  </div>
             </div>
 
             <div class="col-6">
             Catégorie
-            <select id="categorieLocalisation" class="input-field" >
+            <span class="help-block" style='color:red;'><?php echo $errorC; ?></span>
+            <div class="<?php echo (!empty($errorC)) ? 'has-error' : ''; ?>">
+            <select id="categorie" class="input-field" name="categorie" value="<?php echo $categorie; ?>">
               <option value="">Choissez votre localisation</option>
               <option value="Bureau">Bureau</option>
               <option value="Équipement de laboratoire">Équipement de laboratoire</option>
@@ -301,24 +300,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </select>
             <br>
           </div>
+          </div>
           <br>
 
            <div class="col-6">
-           <span class="display_error_msg" id="errorL"></span >
-            <div class="input-container">
+          <span class="help-block" style='color:red;'><?php echo $errorL; ?></span>
+            <div class="input-container <?php echo (!empty($errorL)) ? 'has-error' : ''; ?>">
               <i class="" style='font-size:15px'></i>
-              <input  class="input-field"  type="text" id="localisation" placeholder="No Bureau/Classe concerné" name="localisation" />
+              <input  class="input-field"  type="text" id="localisation" placeholder="No Bureau/Classe concerné" name="localisation" value="<?php echo $localisation; ?>"/>
             </div>
           </div>
         </div>
 
 
       <!-- textarea for remark -->
-          <span class="display_error_msg" id="errorr"></span >
-           <textarea class="form-control" style="font-size:14px;" rows="5" cols="51"  id="comment" placeholder="Énoncer brièvement le problème" ></textarea>
+        <span class="help-block" style='color:red;'><?php echo $errorr; ?></span>
+ <div class="<?php echo (!empty($errorr)) ? 'has-error' : ''; ?>" >
+           <textarea class="form-control" style="font-size:14px;" rows="5" cols="51"  id="description" placeholder="Énoncer brièvement le problème" name="description" value="<?php echo $description; ?>"></textarea>
 
      <!--<button type="button" class="btn_login"  onClick="verification()" id="ok">LOGIN </button>-->
-      <button type="submit" name="form1" id="form1" class="butp" onClick="verification()" id="ok" >Soumettre une demande</button>
+      <button type="submit" name="form2" id="form2" class="butp" >Soumettre une demande</button>
              <!--<button type="button" class="btn" >LOGIN</button>-->
              <div class="login_bottom">
 
