@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $errorN = "*Vous devez insérer votre nom.";
     } else{
         // Prepare a select statemen
-        $sql = "SELECT id FROM users WHERE username = ?";
+        $sql = "SELECT UserID FROM applicant WHERE username = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -93,7 +93,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($errorN) && empty($errorP) && empty($errorpwd) && empty($errorCP) ){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password, prenom, email, dob) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO applicant (username, password, prenom, email, dob) VALUES (?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -190,7 +190,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <!-- form to register new user -->
       <br>
 
-   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" >
      <span class="help-block" style='color:red;'><?php echo $errorN; ?></span>
         <div class="input-container <?php echo (!empty($errorN)) ? 'has-error' : ''; ?>">
           <i class="fa fa-user icon"></i>

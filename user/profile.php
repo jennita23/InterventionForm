@@ -9,66 +9,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 ?>
 
-<?php
-session_start();
-
-include_once '../assets/conn/dbconnect.php';
-if(!isset($_SESSION['userSession']))
-{
-header("Location: ../index.html");
-}
-$res=mysqli_query($con,"SELECT * FROM users WHERE id=".$_SESSION['userSession']);
-$userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
-?>
-<!-- update -->
-<?php
-if (isset($_POST['submit'])) {
-//variables
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$dob = $_POST['dob'];
-$email = $_POST['email'];
-$year = $_POST['year'];
-$gender = $_POST['gender'];
-
-$patientId = $_POST['patientId'];
-// mysqli_query("UPDATE blogEntry SET content = $udcontent, title = $udtitle WHERE id = $id");
-$res=mysqli_query($con,"UPDATE users SET username='$nom', prenom='$prenom', email='$email', dob='$dob' WHERE id=".$_SESSION['userSession']);
-// $userRow=mysqli_fetch_array($res);
-header( 'Location: profile.php' ) ;
-}
-?>
-<?php
-$male="";
-$female="";
-if ($userRow['patientGender']=='male') {
-$male = "checked";
-}elseif ($userRow['patientGender']=='female') {
-$female = "checked";
-}
-$single="";
-$married="";
-$separated="";
-$divorced="";
-$widowed="";
-if ($userRow['patientMaritialStatus']=='single') {
-$single = "checked";
-}elseif ($userRow['patientMaritialStatus']=='married') {
-$married = "checked";
-}elseif ($userRow['patientMaritialStatus']=='separated') {
-$separated = "checked";
-}elseif ($userRow['patientMaritialStatus']=='divorced') {
-$divorced = "checked";
-}elseif ($userRow['patientMaritialStatus']=='widowed') {
-$widowed = "checked";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard</title>
+    <title>Welcome</title>
 
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; }
@@ -86,76 +31,17 @@ $widowed = "checked";
       <link rel="stylesheet" href="../css/animate.min.css">
       <link rel="stylesheet" href="../css/owl.carousel.css">
       <link rel="stylesheet" href="../css/main.css">
-      <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-		<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-
-		<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
-
-    <style>
-		.top-area {
-		    background: #2B6B29E6;
-				color: white;
-				font-size: 16px;
-				font-weight: 700;
-				width:100%;
-				padding-top: 20px;
-		padding-bottom: 20px;
-
-		}
-		.container-fluid {
-			padding-right: 15px;
-			padding-left: 50px;
-			margin-right: auto;
-			margin-left: auto;
-		}
-		.btnU {
-		    color: #fff;
-		    background-color: #2B6B29E6;
-		    border-color: #2B6B29E6;
-
-
-}
-.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #a49c9c;
-}
-table {
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-body {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-}
-.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
-}
-.panel-body {
-    padding: 16px;
-}
-		</style>
 </head>
 <body>
   <div class="container main-menu">
       <div class="row align-items-center justify-content-between d-flex">
         <div id="logo">
-          <a href="dashboard.php"><img src="img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
+          <a href="dashboard.php"><img src="../img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
         </div>
         <nav id="nav-menu-container">
 
           <ul class="nav-menu">
-              <li active ><a href="profile.php">Mon profile</a></li>
-              
+              <li active ><a href="dashboard.php">Mon profile</a></li>
 
               <li class="menu-has-children"><a href="">Demande Intervention</a>
                 <ul>
@@ -177,43 +63,6 @@ body {
         <h1 style='text-align: center;'>Hi, <b><?php echo htmlspecialchars($_SESSION["email"]); ?></b>. Welcome to your profile.</h1>
     </div>
     <p>
-
-      <!-- navigation -->
-		<nav class="navbar navbar-default " role="navigation">
-			<div class="container-fluid">
-				<!-- Brand and toggle get together(grouping) to  display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					</button>
-
-				</div>
-
-
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?><b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li>
-									<!--<a href="profile.php?patientId=<?php echo $userRow['id']; ?>"><i class="fa fa-fw fa-user"></i> Profile</a>-->
-								</li>
-								<li>
-								<!--	<a href="patientapplist.php?patientId=<?php echo $userRow['id']; ?>"><i class="glyphicon glyphicon-file"></i> Appointment</a>-->
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="../logout.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<!-- navigation -->
 
     </p>
     <script src="../js/vendor/jquery-2.2.4.min.js"></script>

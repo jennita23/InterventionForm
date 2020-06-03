@@ -1,18 +1,15 @@
 <?php
 // Initialize the session
-include_once 'assets/conn/dbconnect.php';
 session_start();
+include_once 'assets/conn/dbconnect.php';
 
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
+if(!isset($_SESSION['id']))
+{
+header("Location: ../index.php");
 }
-?>
+// Check if the user is logged in, if not then redirect him to login page
 
-<?php
-
-$res=mysqli_query($con,"SELECT * FROM users WHERE id=".$_SESSION['loggedin']);
+$res=mysqli_query($con,"SELECT * FROM applicant WHERE UserID=".$_SESSION['id']);
 $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
 ?>
 <!-- update -->
@@ -28,7 +25,7 @@ $year = $_POST['year'];
 
 $patientId = $_POST['patientId'];
 // mysqli_query("UPDATE blogEntry SET content = $udcontent, title = $udtitle WHERE id = $id");
-$res=mysqli_query($con,"UPDATE users SET username='$username', prenom='$prenom', email='$email', dob='$dob', gender='$gender' , year='$year' WHERE id=".$_SESSION['loggedin']);
+$res=mysqli_query($con,"UPDATE applicant SET username='$username', prenom='$prenom', email='$email', dob='$dob', gender='$gender' , year='$year' WHERE UserID=".$_SESSION['id']);
 // $userRow=mysqli_fetch_array($res);
 header( 'Location: dashboard.php' ) ;
 }
@@ -56,6 +53,7 @@ $female = "checked";
     <!--
       CSS
       ============================================= -->
+
       <link href="../css/login.css" rel="stylesheet" type="text/css" />
       <link rel="stylesheet" href="../css/linearicons.css">
       <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -66,10 +64,11 @@ $female = "checked";
       <link rel="stylesheet" href="../css/animate.min.css">
       <link rel="stylesheet" href="../css/owl.carousel.css">
       <link rel="stylesheet" href="../css/main.css">
-      <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
 
       <link href="assets/css/date/bootstrap-datepicker.css" rel="stylesheet">
       <link href="assets/css/date/bootstrap-datepicker3.css" rel="stylesheet">
+      <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
 		.top-area {
@@ -86,14 +85,17 @@ $female = "checked";
 			padding-right: 15px;
 			padding-left: 50px;
 			margin-right: auto;
-			margin-left: auto;
+			margin-left: 1000px;
 		}
 		.btnU {
 		    color: #fff;
-		    background-color: #2B6B29E6;
-		    border-color: #2B6B29E6;
+		    background-color: #8490ff;
+		    border-color: #8490ff;
 
 
+}
+.topnav-right{
+  float: right;
 }
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
     padding: 8px;
@@ -123,37 +125,39 @@ body {
 		</style>
 </head>
 <body>
+  <header id="header">
   <div class="container main-menu">
-      <div class="row align-items-center justify-content-between d-flex">
-        <div id="logo">
-          <a href="dashboard.php"><img src="img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
+      <div class="row align-items-center justify-content">
+        <div id="logo" >
+          <a href="dashboard.php"><img src="../img/mainLogo.png" alt="" title=""  width="250" height="60"/></a>
         </div>
-        <nav id="nav-menu-container">
+
+        <nav id="nav-menu-container" class="topnav-right">
 
           <ul class="nav-menu">
               <li active ><a href="dashboard.php">Mon profile</a></li>
 
               <li class="menu-has-children"><a href="">Demande Intervention</a>
                 <ul>
-                  <li><a href="interventionFormTeacher.php">professeur</a></li>
-                  <li><a href="interventionFormStudent.php"> étudiants</a></li>
+                  <li><a href="../interventionFormTeacher.php">professeur</a></li>
+                  <li><a href="../interventionFormStudent.php"> étudiants</a></li>
                 </ul>
               </li>
-            <li><a href="logout.php">Deconnexion</a></li>
+            <li><a href="interventionDetails.php">Consulter Demande</a></li>
               </ul>
         </nav><!-- #nav-menu-container -->
       </div>
-    </div>
+      </div>
+
+      </header><!-- #header -->
 
     <br>
-    <br>
-    <br>
-    <br>
+
     <div class="page-header">
-        <h1 style='text-align: center;'>Hi, <b><?php echo htmlspecialchars($_SESSION["email"]); ?></b>. Welcome to your profile.</h1>
+
     </div>
     <p>
-
+<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["email"]); ?></b>. Welcome to our site.</h1>
       <!-- navigation -->
 		<nav class="navbar navbar-default " role="navigation">
 			<div class="container-fluid">
@@ -197,10 +201,10 @@ body {
 									<h4><?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?></h4>
 									<h5> <strong>  </strong></h5>
 									<p>
-										Passionate and loving!
+
 									</p>
 									<hr />
-									<button type="button" class="btn btnU" data-toggle="modal" data-target="#myModal">Update Profile</button>
+									<button type="button" class="btn btnU" data-toggle="modal" data-target="#myModal">Modifier mon profile</button>
 								</div>
 							</div>
 						</div>
@@ -323,7 +327,7 @@ body {
                             <td>Annee</td>
                             <td><input type="text" class="form-control" name="year" value="<?php echo $userRow['year']; ?>"  /></td>
                           </tr>
-                        
+
 													<tr>
 														<td>
 															<input type="submit" name="submit" class="btn btnU" value="Modifier Information"></td>
@@ -379,5 +383,5 @@ body {
    <script src="../js/mail-script.js"></script>
    <script src="../js/main.js"></script>
    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-</body>
+
 </html>

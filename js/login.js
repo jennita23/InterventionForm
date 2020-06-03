@@ -3,15 +3,15 @@
   {
     var error=false;
   var password =document.getElementById("password").value;
-  var email =document.getElementById("email").value; //email adress
+  var username =document.getElementById("username").value; //email adress
 
 
   //re intialise les textbox
-  $('#email').css("border-color","#CCC");
+  $('#username').css("border-color","#CCC");
     $('#password').css("border-color","#CCC");
 
 
-    if (  password == ""  || email =="" )
+    if (  password == ""  ||username =="" )
      {
          error=true;
    //si un textbox est vide
@@ -24,10 +24,10 @@
            }
 
            //si le texttbox pour inserer lastname est vide
-             if (email == "")
+             if (username == "")
 
              {
-                 $('#email ').css("border-color","#CF161E");
+                 $('#username').css("border-color","#CF161E");
                   document.getElementById('errorpass').innerHTML = "* Vous devez insérer votre mot de passe. ";
              }
 
