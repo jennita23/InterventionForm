@@ -155,6 +155,7 @@ body {
 
           <ul class="nav-menu">
               <li active ><a href="profile.php">Mon profile</a></li>
+              
 
               <li class="menu-has-children"><a href="">Demande Intervention</a>
                 <ul>
@@ -204,7 +205,7 @@ body {
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="logout.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+									<a href="../logout.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 								</li>
 							</ul>
 						</li>

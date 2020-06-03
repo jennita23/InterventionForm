@@ -19,7 +19,7 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
 <?php
 if (isset($_POST['submit'])) {
 //variables
-$nom = $_POST['nom'];
+$nom = $_POST['username'];
 $prenom = $_POST['prenom'];
 $dob = $_POST['dob'];
 $email = $_POST['email'];
@@ -28,12 +28,21 @@ $gender = $_POST['gender'];
 
 $patientId = $_POST['patientId'];
 // mysqli_query("UPDATE blogEntry SET content = $udcontent, title = $udtitle WHERE id = $id");
-$res=mysqli_query($con,"UPDATE users SET username='$nom', prenom='$prenom', email='$email', dob='$dob' WHERE id=".$_SESSION['loggedin']);
+$res=mysqli_query($con,"UPDATE users SET username='$nom', prenom='$prenom', email='$email', dob='$dob', gender='$gender' , year='$year' WHERE id=".$_SESSION['loggedin']);
 // $userRow=mysqli_fetch_array($res);
 header( 'Location: dashboard.php' ) ;
 }
 ?>
 
+<?php
+$male="";
+$female="";
+if ($userRow['gender']=='Male') {
+$male = "checked";
+}elseif ($userRow['gender']=='Female') {
+$female = "checked";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,10 +71,6 @@ header( 'Location: dashboard.php' ) ;
       <link href="assets/css/date/bootstrap-datepicker.css" rel="stylesheet">
       <link href="assets/css/date/bootstrap-datepicker3.css" rel="stylesheet">
 
-		  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-
-		  <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
-
     <style>
 		.top-area {
 		    background: #2B6B29E6;
@@ -74,7 +79,7 @@ header( 'Location: dashboard.php' ) ;
 				font-weight: 700;
 				width:100%;
 				padding-top: 20px;
-		padding-bottom: 20px;
+		    padding-bottom: 20px;
 
 		}
 		.container-fluid {
@@ -126,7 +131,7 @@ body {
         <nav id="nav-menu-container">
 
           <ul class="nav-menu">
-              <li active ><a href="profile.php">Mon profile</a></li>
+              <li active ><a href="dashboard.php">Mon profile</a></li>
 
               <li class="menu-has-children"><a href="">Demande Intervention</a>
                 <ul>
@@ -156,33 +161,25 @@ body {
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+
 					</button>
 
 				</div>
 
-
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?><b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user "></i> <?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?></a>
 							<ul class="dropdown-menu">
+
+
 								<li>
-									<!--<a href="profile.php?patientId=<?php echo $userRow['id']; ?>"><i class="fa fa-fw fa-user"></i> Profile</a>-->
-								</li>
-								<li>
-								<!--	<a href="patientapplist.php?patientId=<?php echo $userRow['id']; ?>"><i class="glyphicon glyphicon-file"></i> Appointment</a>-->
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="logout.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+									<a href="../logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 								</li>
 							</ul>
 						</li>
 					</ul>
 				</div>
-			</div>
+
 		</nav>
 		<!-- navigation -->
 
@@ -197,7 +194,7 @@ body {
 							<div class="user-wrapper">
 								<img src="assets/img/img.jpg" class="img-responsive" />
 								<div class="description">
-									<h4><?php echo $userRow['nom']; ?> <?php echo $userRow['prenom']; ?></h4>
+									<h4><?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?></h4>
 									<h5> <strong>  </strong></h5>
 									<p>
 										Passionate and loving!
@@ -210,13 +207,13 @@ body {
 
 						<div class="col-md-9 col-sm-9  user-wrapper">
 							<div class="description">
-								<h3> <?php echo $userRow['nom']; ?> <?php echo $userRow['prenom']; ?> </h3>
+								<h3> <?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?> </h3>
 								<hr />
 
 								<div class="panel panel-default">
 									<div class="panel-body">
 
-<!--show information on user using a table -->
+                   <!--show information on user using a table -->
 										<table class="table table-user-information" align="center">
 											<tbody>
 												<tr>
@@ -229,8 +226,8 @@ body {
 												</tr>
 
 												<tr>
-													<td>Phone Number</td>
-													<td><?php echo $userRow['patientPhone']; ?>
+													<td>Year</td>
+													<td><?php echo $userRow['year']; ?>
 													</td>
 												</tr>
 												<tr>
@@ -266,7 +263,7 @@ body {
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title" id="myModalLabel">Edit My profile</h4>
+										<h4 class="modal-title" id="myModalLabel">Modifier mon profile</h4>
 									</div>
 									<div class="modal-body">
 										<!-- form start -->
@@ -275,11 +272,11 @@ body {
 												<tbody>
 
 													<tr>
-														<td>First Name:</td>
-														<td><input type="text" class="form-control" name="nom" value="<?php echo $userRow['nom']; ?>"  /></td>
+														<td>Nom:</td>
+														<td><input type="text" class="form-control" name="nom" value="<?php echo $userRow['username']; ?>"  /></td>
 													</tr>
 													<tr>
-														<td>Last Name</td>
+														<td>Prénom</td>
 														<td><input type="text" class="form-control" name="prenom" value="<?php echo $userRow['prenom']; ?>"  /></td>
 													</tr>
 
@@ -287,8 +284,8 @@ body {
 
 													<!-- radio button end -->
 													<tr>
-														<td>Date of Birth</td>
-														<!-- <td><input type="text" class="form-control" name="patientDOB" value="<?php echo $userRow['patientDOB']; ?>"  /></td> -->
+														<td>Date de naissance</td>
+														<!-- <td><input type="text" class="form-control" name="patientDOB" value="<?php echo $userRow['dob']; ?>"  /></td> -->
 														<td>
 															<div class="form-group ">
 
@@ -308,20 +305,23 @@ body {
 														<td>Gender</td>
 														<td>
 															<div class="radio">
-																<label><input type="radio" name="gender" value="male" <?php echo $male; ?>>Male</label>
+																<label><input type="radio" name="gender" value="Male" <?php echo $male; ?>>Male</label>
 															</div>
 															<div class="radio">
-																<label><input type="radio" name="gender" value="female" <?php echo $female; ?>>Female</label>
+																<label><input type="radio" name="gender" value="Female" <?php echo $female; ?>>Female</label>
 															</div>
 														</td>
 													</tr>
 													<!-- radio button end -->
-
-
 													<tr>
-														<td>Email</td>
+														<td>Adresse Email</td>
 														<td><input type="text" class="form-control" name="email" value="<?php echo $userRow['email']; ?>"  /></td>
 													</tr>
+
+                          <tr>
+                            <td>Annee</td>
+                            <td><input type="text" class="form-control" name="email" value="<?php echo $userRow['year']; ?>"  /></td>
+                          </tr>
 
 													<tr>
 														<td>
