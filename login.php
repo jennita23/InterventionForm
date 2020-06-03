@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["email"] = $email;
 
                             // Redirect user to welcome page
-                            header("location: dashboard.php");
+                            header("location: user/profile.php");
                         } else{
                             // Display an error message if password is not valid
                             $errorpwd = "*Le mot de passe que vous avez entré n'est pas valide.";
