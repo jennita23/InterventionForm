@@ -1,10 +1,16 @@
 <?php
-if(!mysql_connect("localhost","",""))
-{
-     die('oops connection problem ! --> '.mysql_error());
-}
-if(!mysql_select_db("test"))
-{
-     die('oops database selection problem ! --> '.mysql_error());
+/* Database credentials. Assuming you are running MySQL
+server with default setting (user 'root' with no password) */
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', '');
+define('DB_PASSWORD', '');
+define('DB_NAME', 'test');
+
+/* Attempt to connect to MySQL database */
+$con = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+// Check connection
+if($con === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 ?>
