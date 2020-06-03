@@ -42,6 +42,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
           <ul class="nav-menu">
               <li active ><a href="dashboard.php">Mon profile</a></li>
+                <li active ><a href="profile.php">Mon profile</a></li>
               <li class="menu-has-children"><a href="">Demande Intervention</a>
                 <ul>
                   <li><a href="interventionFormTeacher.php">professeur</a></li>
@@ -62,7 +63,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <h1 style='text-align: center;'>Hi, <b><?php echo htmlspecialchars($_SESSION["email"]); ?></b>. Welcome to your profile.</h1>
     </div>
     <p>
-        
+
     </p>
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
    <script src="js/popper.min.js"></script>
