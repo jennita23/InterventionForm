@@ -19,16 +19,16 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
 <?php
 if (isset($_POST['submit'])) {
 //variables
-$nom = $_POST['username'];
+$username = $_POST['username'];
 $prenom = $_POST['prenom'];
-$dob = $_POST['dob'];
 $email = $_POST['email'];
-$year = $_POST['year'];
+$dob = $_POST['dob'];
 $gender = $_POST['gender'];
+$year = $_POST['year'];
 
 $patientId = $_POST['patientId'];
 // mysqli_query("UPDATE blogEntry SET content = $udcontent, title = $udtitle WHERE id = $id");
-$res=mysqli_query($con,"UPDATE users SET username='$nom', prenom='$prenom', email='$email', dob='$dob', gender='$gender' , year='$year' WHERE id=".$_SESSION['loggedin']);
+$res=mysqli_query($con,"UPDATE users SET username='$username', prenom='$prenom', email='$email', dob='$dob', gender='$gender' , year='$year' WHERE id=".$_SESSION['loggedin']);
 // $userRow=mysqli_fetch_array($res);
 header( 'Location: dashboard.php' ) ;
 }
@@ -273,13 +273,17 @@ body {
 
 													<tr>
 														<td>Nom:</td>
-														<td><input type="text" class="form-control" name="nom" value="<?php echo $userRow['username']; ?>"  /></td>
+														<td><input type="text" class="form-control" name="username" value="<?php echo $userRow['username']; ?>"  /></td>
 													</tr>
 													<tr>
 														<td>Prénom</td>
 														<td><input type="text" class="form-control" name="prenom" value="<?php echo $userRow['prenom']; ?>"  /></td>
 													</tr>
 
+                          <tr>
+                            <td>Adresse Email</td>
+                            <td><input type="text" class="form-control" name="email" value="<?php echo $userRow['email']; ?>"  /></td>
+                          </tr>
 													<!-- radio button -->
 
 													<!-- radio button end -->
@@ -294,7 +298,7 @@ body {
 																		<i class="fa fa-calendar">
 																		</i>
 																	</div>
-																	<input class="form-control" id="dob" name="dob" placeholder="MM/DD/YYYY" type="text" value="<?php echo $userRow['dob']; ?>"/>
+																	<input class="form-control" id="dob" name="dob" placeholder="MM/DD/YYYY" type="date" value="<?php echo $userRow['dob']; ?>"/>
 																</div>
 															</div>
 														</td>
@@ -313,16 +317,13 @@ body {
 														</td>
 													</tr>
 													<!-- radio button end -->
-													<tr>
-														<td>Adresse Email</td>
-														<td><input type="text" class="form-control" name="email" value="<?php echo $userRow['email']; ?>"  /></td>
-													</tr>
+
 
                           <tr>
                             <td>Annee</td>
-                            <td><input type="text" class="form-control" name="email" value="<?php echo $userRow['year']; ?>"  /></td>
+                            <td><input type="text" class="form-control" name="year" value="<?php echo $userRow['year']; ?>"  /></td>
                           </tr>
-
+                        
 													<tr>
 														<td>
 															<input type="submit" name="submit" class="btn btnU" value="Modifier Information"></td>
