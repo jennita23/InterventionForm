@@ -59,11 +59,12 @@ header( 'Location: dashboard.php' ) ;
       <link rel="stylesheet" href="../css/main.css">
       <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
+      <link href="assets/css/date/bootstrap-datepicker.css" rel="stylesheet">
+      <link href="assets/css/date/bootstrap-datepicker3.css" rel="stylesheet">
 
+		  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
-		<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-
-		<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+		  <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 
     <style>
 		.top-area {
@@ -350,6 +351,15 @@ body {
 
 
     </p>
+    <script src="assets/js/jquery.js"></script>
+			<script src="assets/js/bootstrap.min.js"></script>
+
+			<script type="text/javascript">
+														$(function () {
+														$('#dob').datetimepicker();
+														});
+														</script>
+		</body>
     <script src="../js/vendor/jquery-2.2.4.min.js"></script>
    <script src="../js/popper.min.js"></script>
    <script src="../js/vendor/bootstrap.min.js"></script>
