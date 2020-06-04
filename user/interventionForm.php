@@ -9,21 +9,9 @@ header("Location: ../index.php");
 }
 // Define variables and initialize with empty values
 
-$sic = $nom = $prenom = $createdDate = $categorie = $email = $equipement = $lab = $dept = $description = "";
+$sic = $nom = $prenom = $createdDate  = $email = $equipement = $lab = $dept = $description = "";
 
 $errors = $errorn = $errorp = $errore = $errord = $errorEquip = $errorlab = $errorDept = $errorr = "";
-
-$sic=$_POST["sic"];
-$nom=$_POST["nom"];
-$prenom=$_POST["prenom"];
-$email=$_POST["email"];
-$equipement=$_POST["equipement"];
-$categorie=$_POST["categorie"];
-$lab=$_POST["lab"];
-$dept=$_POST["dept"];
-$description=$_POST["description"];
-
-
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -90,12 +78,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $createdDate = trim($_POST["createdDate"]);
     }
 
+
+
     if(empty(trim($_POST["equipement"]))){
         $errorEquip = "*Vous devez spécifier l'équipement.";
     }
     else{
         $equipement = trim($_POST["equipement"]);
     }
+
 
     if(empty(trim($_POST["lab"]))){
         $errorlab = "*Vous devez spécifier le laboratoire.";
@@ -126,7 +117,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     {
         // Prepare an insert statement
 
-        $sql = "INSERT INTO application (idUser, sic, nom, prenom, email, createdDate, categorie, lab, dept, description) VALUES ('" . $_SESSION['id'] ."', '$sic', '$nom', '$prenom', '$email', '$createdDate', '$categorie','$lab', '$dept', '$description')";
+        $sql = "INSERT INTO application (idUser, sic, nom, prenom, email, createdDate, equipement , lab, dept, description) VALUES ('" . $_SESSION['id'] ."', '$sic', '$nom', '$prenom', '$email', '$createdDate', '$equipement','$lab', '$dept', '$description')";
         if(mysqli_query($link, $sql)){
             echo "Records inserted successfully.";
         } else{
