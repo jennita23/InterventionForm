@@ -3,29 +3,28 @@
 session_start();
 include_once 'assets/conn/dbconnect.php';
 
-if(!isset($_SESSION['email']))
+if(!isset($_SESSION['id']))
 {
 header("Location: ../index.php");
 }
+
 // Check if the user is logged in, if not then redirect him to login page
 
-$res=mysqli_query($con,"SELECT * FROM application WHERE appID=".$_SESSION['email']);
+$res=mysqli_query($con,"SELECT * FROM application  WHERE idUser=".$_SESSION['id']);
 $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
 ?>
 <!-- update -->
 <?php
 if (isset($_POST['submit'])) {
 //variables
-$username = $_POST['username'];
+$nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
-$email = $_POST['email'];
-$dob = $_POST['dob'];
-$gender = $_POST['gender'];
-$year = $_POST['year'];
 
-$patientId = $_POST['patientId'];
+$year = $_POST['year'];
+$sic = $_POST['sic'];
+$categorie = $_POST['categorie'];
+
 // mysqli_query("UPDATE blogEntry SET content = $udcontent, title = $udtitle WHERE id = $id");
-$res=mysqli_query($con,"UPDATE applicant SET username='$username', prenom='$prenom', email='$email', dob='$dob', gender='$gender' , year='$year' WHERE UserID=".$_SESSION['email']);
 // $userRow=mysqli_fetch_array($res);
 header( 'Location: dashboard.php' ) ;
 }
@@ -135,7 +134,7 @@ body {
         <nav id="nav-menu-container" class="topnav-right">
 
           <ul class="nav-menu">
-              <li><a href="dashboard.php">Mon profile</a></li>
+              <li active ><a href="dashboard.php">Mon profile</a></li>
 
               <li class="menu-has-children"><a href="">Demande Intervention</a>
                 <ul>
@@ -143,7 +142,7 @@ body {
                   <li><a href="../interventionFormStudent.php"> étudiants</a></li>
                 </ul>
               </li>
-            <li active ><a href="interventionDetails.php">Consulter Demande</a></li>
+            <li><a href="interventionDetails.php">Consulter Demande</a></li>
               </ul>
         </nav><!-- #nav-menu-container -->
       </div>
@@ -172,7 +171,7 @@ body {
 
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user "></i> <?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user "></i> <?php echo $userRow['nom']; ?> <?php echo $userRow['prenom']; ?></a>
 							<ul class="dropdown-menu">
 
 
@@ -198,7 +197,7 @@ body {
 							<div class="user-wrapper">
 								<img src="assets/img/img.jpg" class="img-responsive" />
 								<div class="description">
-									<h4><?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?></h4>
+									<h4><?php echo $userRow['nom']; ?> <?php echo $userRow['prenom']; ?></h4>
 									<h5> <strong>  </strong></h5>
 									<p>
 
@@ -211,7 +210,7 @@ body {
 
 						<div class="col-md-9 col-sm-9  user-wrapper">
 							<div class="description">
-								<h3> <?php echo $userRow['username']; ?> <?php echo $userRow['prenom']; ?> </h3>
+								<h3> <?php echo $userRow['nom']; ?> <?php echo $userRow['prenom']; ?> </h3>
 								<hr />
 
 								<div class="panel panel-default">
@@ -221,17 +220,17 @@ body {
 										<table class="table table-user-information" align="center">
 											<tbody>
 												<tr>
-													<td>Date of Birth </td>
-													<td><?php echo $userRow['dob']; ?></td>
+													<td>Sic </td>
+													<td><?php echo $userRow['sic']; ?></td>
 												</tr>
 												<tr>
-													<td>Gender</td>
-													<td><?php echo $userRow['gender']; ?></td>
+													<td>Categorie</td>
+													<td><?php echo $userRow['categorie']; ?></td>
 												</tr>
 
 												<tr>
-													<td>Year</td>
-													<td><?php echo $userRow['year']; ?>
+													<td>Lab</td>
+													<td><?php echo $userRow['lab']; ?>
 													</td>
 												</tr>
 												<tr>

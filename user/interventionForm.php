@@ -1,18 +1,26 @@
-
 <?php
 // Include config file
 session_start();
-require_once "conn/config.php";
+require_once "../conn/config.php";
 
 if(!isset($_SESSION['id']))
 {
 header("Location: ../index.php");
 }
 // Define variables and initialize with empty values
-$id = $_SESSION['id'];
+
 $sic = $nom = $prenom = $createdDate = $email = $equipement = $lab = $dept = $description = "";
 
 $errors = $errorn = $errorp = $errore = $errord = $errorEquip = $errorlab = $errorDept = $errorr = "";
+
+$sic=$_POST["sic"];
+$nom=$_POST["nom"];
+$prenom=$_POST["prenom"];
+$email=$_POST["email"];
+$equipement=$_POST["equipement"];
+$lab=$_POST["lab"];
+$dept=$_POST["dept"];
+$description=$_POST["description"];
 
 
 
@@ -111,41 +119,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $description = trim($_POST["description"]);
       }
 
+
     // Check input errors before inserting in database
-    if(empty($errors) && empty($errorn) && empty($errorp) && empty($errore) && empty($errord) && empty($errorEquip) && empty($errorlab) && empty($errorDept) && empty($errorr)){
-
+    if(empty($errors) && empty($errorn) && empty($errorp) && empty($errore) && empty($errord) && empty($errorEquip) && empty($errorlab) && empty($errorDept) && empty($errorr))
+    {
         // Prepare an insert statement
-        $sql = "INSERT INTO application (idUser, sic, nom, prenom, email, createdDate, categorie, lab, dept, description) VALUES ('" . $_SESSION['id'] ."', ?, ?, ?, ?, ?, ?, ?, ? ,?)";
 
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssssssssss",$param_userId,$param_sic,$param_username,$param_prenom,$param_email,$param_date,$param_equipement,$param_lab,$param_dept,$param_description);
-
-            // Set parameters
-            $param_userId = $id;
-            $param_sic= $sic;
-            $param_username = $nom;
-            $param_prenom =  $prenom;
-            $param_email = $email;
-            $param_date = $createdDate;
-            $param_equipement = $equipement;
-            $param_lab = $lab;
-            $param_dept = $dept;
-            $param_description = $description;
-
-
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Redirect to login page
-                header("location: user/dashboard.php");
-            } else{
-                echo "Quelque chose a mal tourné. Veuillez réessayer plus tard.";
-            }
-
-            // Close statement
-            mysqli_stmt_close($stmt);
+        $sql = "INSERT INTO application (idUser, sic, nom, prenom, email, createdDate, categorie, lab, dept, description) VALUES ('" . $_SESSION['id'] ."', '$sic', '$nom', '$prenom', '$email', '$createdDate', '$categorie','$lab', '$dept', '$description')";
+        if(mysqli_query($link, $sql)){
+            echo "Records inserted successfully.";
+        } else{
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
         }
+
+        // Close connection
+
     }
+
+
+
+
 
     // Close connection
     mysqli_close($link);
@@ -174,37 +167,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <!--
     CSS
     ============================================= -->
-    <link href="css/login.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/linearicons.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/animate.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link href="../css/login.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../css/linearicons.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/nice-select.css">
+    <link rel="stylesheet" href="../css/animate.min.css">
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/main.css">
 
   </head>
   <body>
-    <header id="header">
-      <div class="container main-menu">
-        <div class="row align-items-center justify-content-between d-flex">
-          <div id="logo">
-            <a href="index.html"><img src="img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
-          </div>
-          <nav id="nav-menu-container">
-
-            <ul class="nav-menu">
-              <li active><a href="dashboard.php">Mon profile</a></li>
-                <li active ><a href="interventionFormStudent.php">Demande Intervention</a></li>
-
-                <li><a href="logout.php">Deconexion</a></li>
-                </ul>
-          </nav><!-- #nav-menu-container -->
-        </div>
-      </div>
-    </header><!-- #header -->
+    -- #header -->
          <div class="login_wrapper">
 
          <!--  <form method="POST" action=""  > -->
@@ -340,23 +316,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 
-    <script src="js/vendor/jquery-2.2.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/vendor/bootstrap.min.js"></script>
-    <script src="js/easing.min.js"></script>
-    <script src="js/hoverIntent.js"></script>
-    <script src="js/superfish.min.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.tabs.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/simple-skillbar.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/vendor/bootstrap.min.js"></script>
+    <script src="../js/easing.min.js"></script>
+    <script src="../js/hoverIntent.js"></script>
+    <script src="../js/superfish.min.js"></script>
+    <script src="../js/jquery.ajaxchimp.min.js"></script>
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+    <script src="../js/jquery.tabs.min.js"></script>
+    <script src="../js/jquery.nice-select.min.js"></script>
+    <script src="../js/isotope.pkgd.min.js"></script>
+    <script src="../js/waypoints.min.js"></script>
+    <script src="./js/jquery.counterup.min.js"></script>
+    <script src="../js/simple-skillbar.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/mail-script.js"></script>
+    <script src="../js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="js/FormStudent.js"></script>
   </body>

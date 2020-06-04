@@ -1,13 +1,6 @@
-<?php
-// Initialize the session
-session_start();
 
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
-?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +24,30 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <link rel="stylesheet" href="../css/animate.min.css">
       <link rel="stylesheet" href="../css/owl.carousel.css">
       <link rel="stylesheet" href="../css/main.css">
+      <style>
+      .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+          padding: 8px;
+          line-height: 1.42857143;
+          vertical-align: top;
+          border-top: 1px solid #a49c9c;
+      }
+      table {
+          border-spacing: 0;
+          border-collapse: collapse;
+      }
+      body {
+          font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+          font-size: 14px;
+          line-height: 1.42857143;
+          color: #333;
+      }
+      .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+          padding: 8px;
+          line-height: 1.42857143;
+          vertical-align: top;
+          border-top: 1px solid #ddd;
+      }
+      </style>
 </head>
 <body>
   <div class="container main-menu">
@@ -64,6 +81,48 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </div>
     <p>
 
+      <?php
+      /* Attempt MySQL server connection. Assuming you are running MySQL
+      server with default setting (user 'root' with no password) */
+      $link = mysqli_connect("localhost", "root", "", "test");
+
+      // Check connection
+      if($link === false){
+          die("ERROR: Could not connect. " . mysqli_connect_error());
+      }
+
+      // Attempt select query execution
+      $sql = "SELECT * FROM student where studentID=1";
+      if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+              echo "<table>";
+                  echo "<tr>";
+                      echo "<th>id</th>";
+                      echo "<th>first_name</th>";
+                      echo "<th>last_name</th>";
+                      echo "<th>email</th>";
+                  echo "</tr>";
+              while($row = mysqli_fetch_array($result)){
+                  echo "<tr>";
+                      echo "<td>" . $row['studentID'] . "</td>";
+                      echo "<td>" . $row['nom'] . "</td>";
+                      echo "<td>" . $row['prenom'] . "</td>";
+                      echo "<td>" . $row['email'] . "</td>";
+                  echo "</tr>";
+              }
+              echo "</table>";
+              // Free result set
+              mysqli_free_result($result);
+          } else{
+              echo "No records matching your query were found.";
+          }
+      } else{
+          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+      }
+
+      // Close connection
+      mysqli_close($link);
+      ?>
     </p>
     <script src="../js/vendor/jquery-2.2.4.min.js"></script>
    <script src="../js/popper.min.js"></script>
