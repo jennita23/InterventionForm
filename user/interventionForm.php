@@ -172,7 +172,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   </head>
   <body>
-    -- #header -->
+    <header id="header">
+      <div class="container main-menu">
+        <div class="row align-items-center justify-content-between d-flex">
+          <div id="logo">
+            <a href="index.html"><img src="img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
+          </div>
+          <nav id="nav-menu-container">
+
+            <ul class="nav-menu">
+              <li active><a href="dashboard.php">Mon profile</a></li>
+                <li active ><a href="interventionForm.php">Demande Intervention</a></li>
+
+                <li><a href="applicationForm.php">Consulter Demande</a></li>
+                </ul>
+          </nav><!-- #nav-menu-container -->
+        </div>
+      </div>
+    </header><!-- #header -->
          <div class="login_wrapper">
 
          <!--  <form method="POST" action=""  > -->
