@@ -9,7 +9,7 @@ header("Location: ../index.php");
 }
 // Define variables and initialize with empty values
 
-$sic = $nom = $prenom = $createdDate = $email = $equipement = $lab = $dept = $description = "";
+$sic = $nom = $prenom = $createdDate = $categorie = $email = $equipement = $lab = $dept = $description = "";
 
 $errors = $errorn = $errorp = $errore = $errord = $errorEquip = $errorlab = $errorDept = $errorr = "";
 
@@ -18,6 +18,7 @@ $nom=$_POST["nom"];
 $prenom=$_POST["prenom"];
 $email=$_POST["email"];
 $equipement=$_POST["equipement"];
+$categorie=$_POST["categorie"];
 $lab=$_POST["lab"];
 $dept=$_POST["dept"];
 $description=$_POST["description"];
