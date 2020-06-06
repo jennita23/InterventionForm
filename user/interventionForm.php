@@ -176,7 +176,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
           <div id="logo">
-            <a href="index.html"><img src="img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
+            <a href="index.html"><img src="../img/mainLogo.png" alt="" title=""  width="250" height="60" /></a>
           </div>
           <nav id="nav-menu-container">
 
@@ -268,7 +268,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="col">
               Catégorie de problème
                 <span class="help-block" style='color:red;'><?php echo $errorEquip; ?></span>
-                  <select id="equipment" class="input-field" name="equipement" value="<?php echo $equipement; ?>">
+                  <select id="equipement" class="input-field" name="equipement" value="<?php echo $equipement; ?>">
                    <option value="">Choissez une catégorie ...</option>
                    <option value="Wifi">Wifi</option>
                    <option value="Projecteur">Projecteur</option>
