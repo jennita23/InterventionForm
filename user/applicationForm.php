@@ -250,15 +250,15 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <tr class="filters">
-                                    <th><input type="text" class="form-control" placeholder="Nom" ></th>
-                                    <th><input type="text" class="form-control" placeholder="Prénom" ></th>
-                                    <th><input type="text" class="form-control" placeholder="Date" ></th>
-                                    <th><input type="text" class="form-control" placeholder="Laboratoire" ></th>
-                                    <th><input type="text" class="form-control" placeholder="Equipement" ></th>
-                                    <th><input type="text" class="form-control" placeholder="Description" ></th>
-                                    <th><input type="text" class="form-control" placeholder="Statut" ></th>
-                                    <th><input type="text" class="form-control" placeholder="Accessible"</th>
-                                    <th><input type="text" class="form-control" placeholder="Statut Equipement" style='width:185px;'></th>
+                                    <th><input type="text" class="form-control" placeholder="Nom" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Prénom" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Date" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Laboratoire" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Equipement" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Description" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Statut" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Accessible" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Statut Equipement" style='width:185px;' disabled></th>
                                 </tr>
                             </thead>
 
@@ -286,9 +286,9 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                                     echo "<td>" . $patientRow['statut'] . "</td>";
                                     echo "<td>" . $patientRow['disponible'] . "</td>";
                                     echo "<td>" . $patientRow['statutEquipement'] . "</td>";
-                                    echo "<form method='POST'>";
-                                   echo "<td class='text-center'><a href='#' id='".$patientRow['idUser']."' class='delete'></a>
-                            </td>";
+                                  //  echo "<form method='POST'>";
+                                   //echo "<td class='text-center'><a href='#' id='".$patientRow['idUser']."' class='delete'></a>  </td>";
+
 
                             }
                                 echo "</tr>";
@@ -313,7 +313,7 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
 
 
         <!-- jQuery -->
-        <script src="../patient/assets/js/jquery.js"></script>
+        <script src="assets/js/jquery.js"></script>
         <script type="text/javascript">
 $(function() {
 $(".delete").click(function(){
@@ -336,8 +336,54 @@ return false;
 });
 </script>
 
+<script type="text/javascript">
+            /* filter information on user */
+            $(document).ready(function(){
+                $('.filterable .btn-filter').click(function(){
+                    var $panel = $(this).parents('.filterable'),
+                    $filters = $panel.find('.filters input'),
+                    $tbody = $panel.find('.table tbody');
+                    if ($filters.prop('disabled') == true) {
+                        $filters.prop('disabled', false);
+                        $filters.first().focus();
+                    } else {
+                        $filters.val('').prop('disabled', true);
+                        $tbody.find('.no-result').remove();
+                        $tbody.find('tr').show();
+                    }
+                });
 
-        <script src="../patient/assets/js/bootstrap.min.js"></script>
+                $('.filterable .filters input').keyup(function(e){
+                    /* Ignore tab key */
+                    var code = e.keyCode || e.which;
+                    if (code == '9') return;
+                    /* Useful data and selectors */
+                    var $input = $(this),
+                    inputContent = $input.val().toLowerCase(),
+                    $panel = $input.parents('.filterable'),
+                    column = $panel.find('.filters th').index($input.parents('th')),
+                    $table = $panel.find('.table'),
+                    $rows = $table.find('tbody tr');
+
+                    var $filteredRows = $rows.filter(function(){
+                        var value = $(this).find('td').eq(column).text().toLowerCase();
+                        return value.indexOf(inputContent) === -1;
+                    });
+                    /* Clear previous no-result if exist */
+                    $table.find('tbody .no-result').remove();
+
+                    $rows.show();
+                    $filteredRows.hide();
+                    /* Prepend no-result row if all rows are filtered */
+                    if ($filteredRows.length === $rows.length) {
+                        $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found ! </td></tr>'));
+                    }
+                });
+            });
+        </script>
+
+
+        <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/bootstrap-clockpicker.js"></script>
 
     </body>
