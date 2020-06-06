@@ -1723,7 +1723,8 @@ pre code {
 }
 
 .form-control:disabled, .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: transparent;
+  color:black;
   opacity: 1;
 }
 

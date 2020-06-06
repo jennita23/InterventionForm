@@ -26,7 +26,27 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
         <title>Bienvenue <?php echo $userRow['username'];?> <?php echo $userRow['prenom'];?></title>
         <!-- Bootstrap Core CSS -->
         <!-- <link href="assets/css/bootstrap.css" rel="stylesheet"> -->
-        <link href="assets/css/material.css" rel="stylesheet">
+        <!--
+      CSS
+      ============================================= -->
+
+
+
+
+      <link href="assets/css/date/bootstrap-datepicker.css" rel="stylesheet">
+      <link href="assets/css/date/bootstrap-datepicker3.css" rel="stylesheet">
+      <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+      <link href="assets/css/material.css" rel="stylesheet">
+      <link rel="stylesheet" href="../css/linearicons.css">
+      <link rel="stylesheet" href="../css/font-awesome.min.css">
+      <link rel="stylesheet" href="../css/bootstrap.css">
+      <link rel="stylesheet" href="../css/magnific-popup.css">
+      <link rel="stylesheet" href="../css/jquery-ui.css">
+      <link rel="stylesheet" href="../css/nice-select.css">
+      <link rel="stylesheet" href="../css/animate.min.css">
+      <link rel="stylesheet" href="../css/owl.carousel.css">
+      <link rel="stylesheet" href="../css/main.css">
+
         <!-- Custom CSS -->
         <link href="assets/css/sb-admin.css" rel="stylesheet">
         <link href="assets/css/time/bootstrap-clockpicker.css" rel="stylesheet">
@@ -214,6 +234,30 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
   </style>
     </head>
     <body>
+      <header id="header">
+      <div class="container main-menu">
+      <div class="row align-items-center justify-content">
+        <div id="logo" >
+          <a href="dashboard.php"><img src="../img/mainLogo.png" alt="" title=""  width="250" height="60"/></a>
+        </div>
+
+        <nav id="nav-menu-container" class="topnav-right">
+
+          <ul class="nav-menu">
+              <li active ><a href="dashboard.php">Mon profile</a></li>
+
+              <li class="menu-has-children"><a href="">Demande Intervention</a>
+                <ul>
+                  <li><a href="../interventionFormTeacher.php">professeur</a></li>
+                  <li><a href="interventionForm.php"> étudiants</a></li>
+                </ul>
+              </li>
+            <li><a href="applicationForm.php">Consulter Demande</a></li>
+              </ul>
+        </nav><!-- #nav-menu-container -->
+      </div>
+      </div>
+       </header>
         <div id="wrapper">
             <!-- Navigation -->
             <div id="page-wrapper">
@@ -238,8 +282,8 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                         <!-- panel heading starat -->
                         <div class="panel-heading">
                             <h3 class="panel-title">Mes interventions</h3>
-                            <div class="pull-right">
-                            <button class="btn btn-default btn-xs btn-filter"><span class="fa fa-filter"></span> Search</button>
+                            <div class="pull-up" >
+                            <button class="btn btn-default btn-xs btn-filter" ><span class="fa fa-filter"></span> Search</button>
                         </div>
                         </div>
                         <!-- panel heading end -->
@@ -382,6 +426,24 @@ return false;
             });
         </script>
 
+        <script src="../js/vendor/jquery-2.2.4.min.js"></script>
+           <script src="../js/popper.min.js"></script>
+           <script src="../js/vendor/bootstrap.min.js"></script>
+           <script src="../js/easing.min.js"></script>
+           <script src="../js/hoverIntent.js"></script>
+           <script src="../js/superfish.min.js"></script>
+           <script src="../js/jquery.ajaxchimp.min.js"></script>
+           <script src="../js/jquery.magnific-popup.min.js"></script>
+           <script src="../js/jquery.tabs.min.js"></script>
+           <script src="../js/jquery.nice-select.min.js"></script>
+           <script src="../js/isotope.pkgd.min.js"></script>
+           <script src="../js/waypoints.min.js"></script>
+           <script src="../js/jquery.counterup.min.js"></script>
+           <script src="../js/simple-skillbar.js"></script>
+           <script src="../js/owl.carousel.min.js"></script>
+           <script src="../js/mail-script.js"></script>
+           <script src="../js/main.js"></script>
+           <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/bootstrap-clockpicker.js"></script>
