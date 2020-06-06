@@ -283,7 +283,7 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                         <div class="panel-heading">
                             <h3 class="panel-title">Mes interventions</h3>
                             <div class="pull-up" >
-                            <button class="btn btn-default btn-xs btn-filter" ><span class="fa fa-filter"></span> Search</button>
+                            <button class="btn btn-default btn-xs btn-filter" ><span class="fa fa-filter"></span>Recherche</button>
                         </div>
                         </div>
                         <!-- panel heading end -->
@@ -344,18 +344,12 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                         echo "</div>";
                         echo "</div>";
                         ?>
-                        <!-- panel content end -->
-                        <!-- panel end -->
+        
                         </div>
                     </div>
                     <!-- panel start -->
-
                 </div>
             </div>
-
-
-
-
         <!-- jQuery -->
         <script src="assets/js/jquery.js"></script>
         <script type="text/javascript">

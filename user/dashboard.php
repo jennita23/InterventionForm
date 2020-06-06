@@ -45,7 +45,7 @@ $female = "checked";
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard</title>
+  <title>Bienvenue <?php echo $userRow['username'];?> <?php echo $userRow['prenom'];?></title>
 
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; }
@@ -157,7 +157,7 @@ body {
 
     </div>
     <p>
-<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["email"]); ?></b>. Welcome to our site.</h1>
+
       <!-- navigation -->
 		<nav class="navbar navbar-default " role="navigation">
 			<div class="container-fluid">
