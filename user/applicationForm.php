@@ -11,12 +11,8 @@ if(!isset($_SESSION['id']))
 header("Location: ../index.php");
 }
 $usersession = $_SESSION['id'];
-$res=mysqli_query($con,"SELECT * FROM applicant WHERE idUser=".$usersession);
+$res=mysqli_query($con,"SELECT * FROM applicant WHERE UserID=".$usersession);
 $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
-
-
-
-
 
 ?>
 <!DOCTYPE html>
@@ -27,7 +23,7 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Welcome Dr <?php echo $userRow['doctorFirstName'];?> <?php echo $userRow['doctorLastName'];?></title>
+        <title>Bienvenue <?php echo $userRow['username'];?> <?php echo $userRow['prenom'];?></title>
         <!-- Bootstrap Core CSS -->
         <!-- <link href="assets/css/bootstrap.css" rel="stylesheet"> -->
         <link href="assets/css/material.css" rel="stylesheet">
@@ -90,8 +86,8 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
     }
     .panel-primary > .panel-heading {
         color: #ffffff;
-        background-color: green;
-        border-color: green;
+        background-color: #225A8BD9;
+        border-color: #225A8BD9;
     }
 
     .panel-heading {
@@ -219,20 +215,18 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
     </head>
     <body>
         <div id="wrapper">
-
             <!-- Navigation -->
-          
             <div id="page-wrapper">
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <h2 class="page-header">
-                                <img src="../img/logo1.png" alt="" width="150" height="40" />
+                            <h4 class="page-header">
+
                                 <br>
-                        My Patient
-                            </h2>
+                        Voir le statut de mon application
+                      </h4>
 
                         </div>
                     </div>
@@ -256,14 +250,15 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <tr class="filters">
-                                    <th><input type="text" class="form-control" placeholder="FirstName" disabled></th>
-                                    <th><input type="text" class="form-control" placeholder="Last Name" disabled></th>
-
-                                    <th><input type="text" class="form-control" placeholder="ContactNo." disabled></th>
-                                    <th><input type="text" class="form-control" placeholder="Email" disabled></th>
-                                    <th><input type="text" class="form-control" placeholder="Gender" disabled></th>
-
-                                    <th><input type="text" class="form-control" placeholder="Address" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Nom" ></th>
+                                    <th><input type="text" class="form-control" placeholder="Prénom" ></th>
+                                    <th><input type="text" class="form-control" placeholder="Date" ></th>
+                                    <th><input type="text" class="form-control" placeholder="Laboratoire" ></th>
+                                    <th><input type="text" class="form-control" placeholder="Equipement" ></th>
+                                    <th><input type="text" class="form-control" placeholder="Description" ></th>
+                                    <th><input type="text" class="form-control" placeholder="Statut" ></th>
+                                    <th><input type="text" class="form-control" placeholder="Accessible"</th>
+                                    <th><input type="text" class="form-control" placeholder="Statut Equipement" style='width:185px;'></th>
                                 </tr>
                             </thead>
 
@@ -277,9 +272,6 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                             }
                             //$usersession = $_SESSION['id'];
                             $result=mysqli_query($con,"SELECT * FROM application  WHERE idUser=".$_SESSION['id']);
-
-
-
                             while ($patientRow=mysqli_fetch_array($result)) {
 
 
@@ -287,17 +279,13 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                                 echo "<tr>";
                                     echo "<td>" . $patientRow['nom'] . "</td>";
                                     echo "<td>" . $patientRow['prenom'] . "</td>";
-
-                                    echo "<td>" . $patientRow['email'] . "</td>";
-                                     echo "<td>" . $patientRow['equipement'] . "</td>";
+                                    echo "<td>" . $patientRow['createdDate'] . "</td>";
                                     echo "<td>" . $patientRow['lab'] . "</td>";
-
-
-                                    echo "<td>" . $patientRow['dept'] . "</td>";
-                                      echo "<td>" . $patientRow['description'] . "</td>";
-                                        echo "<td>" . $patientRow['statut'] . "</td>";
-                                          echo "<td>" . $patientRow['disponible'] . "</td>";
-                                            echo "<td>" . $patientRow['statutEquipement'] . "</td>";
+                                    echo "<td>" . $patientRow['equipement'] . "</td>";
+                                    echo "<td>" . $patientRow['description'] . "</td>";
+                                    echo "<td>" . $patientRow['statut'] . "</td>";
+                                    echo "<td>" . $patientRow['disponible'] . "</td>";
+                                    echo "<td>" . $patientRow['statutEquipement'] . "</td>";
                                     echo "<form method='POST'>";
                                    echo "<td class='text-center'><a href='#' id='".$patientRow['idUser']."' class='delete'></a>
                             </td>";
@@ -347,51 +335,6 @@ return false;
 });
 });
 </script>
- <script type="text/javascript">
-            /* filter information on user */
-            $(document).ready(function(){
-                $('.filterable .btn-filter').click(function(){
-                    var $panel = $(this).parents('.filterable'),
-                    $filters = $panel.find('.filters input'),
-                    $tbody = $panel.find('.table tbody');
-                    if ($filters.prop('disabled') == true) {
-                        $filters.prop('disabled', false);
-                        $filters.first().focus();
-                    } else {
-                        $filters.val('').prop('disabled', true);
-                        $tbody.find('.no-result').remove();
-                        $tbody.find('tr').show();
-                    }
-                });
-
-                $('.filterable .filters input').keyup(function(e){
-                    /* Ignore tab key */
-                    var code = e.keyCode || e.which;
-                    if (code == '9') return;
-                    /* Useful data and selectors */
-                    var $input = $(this),
-                    inputContent = $input.val().toLowerCase(),
-                    $panel = $input.parents('.filterable'),
-                    column = $panel.find('.filters th').index($input.parents('th')),
-                    $table = $panel.find('.table'),
-                    $rows = $table.find('tbody tr');
-
-                    var $filteredRows = $rows.filter(function(){
-                        var value = $(this).find('td').eq(column).text().toLowerCase();
-                        return value.indexOf(inputContent) === -1;
-                    });
-                    /* Clear previous no-result if exist */
-                    $table.find('tbody .no-result').remove();
-
-                    $rows.show();
-                    $filteredRows.hide();
-                    /* Prepend no-result row if all rows are filtered */
-                    if ($filteredRows.length === $rows.length) {
-                        $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found ! </td></tr>'));
-                    }
-                });
-            });
-        </script>
 
 
         <script src="../patient/assets/js/bootstrap.min.js"></script>
