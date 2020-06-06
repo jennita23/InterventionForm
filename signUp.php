@@ -172,7 +172,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <ul class="nav-menu">
                 <li><a href="index.html">Acceuil</a></li>
               <li active ><a href="signUp.php">S'inscrire</a></li>
-              <li><a href="login.html">Connexion</a></li>
+              <li><a href="login.php">Connexion</a></li>
                 </ul>
           </nav><!-- #nav-menu-container -->
         </div>
