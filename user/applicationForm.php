@@ -269,6 +269,11 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                             <h4 class="page-header">
 
                                 <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                
                         Voir le statut de mon application
                       </h4>
 
@@ -344,7 +349,7 @@ $userRow=mysqli_fetch_array($res,MYSQLI_ASSOC);
                         echo "</div>";
                         echo "</div>";
                         ?>
-        
+
                         </div>
                     </div>
                     <!-- panel start -->

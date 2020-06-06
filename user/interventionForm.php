@@ -17,7 +17,7 @@ $errors = $errorn = $errorp = $errore = $errord = $errorEquip = $errorlab = $err
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Validate username
-    if(empty(trim($_POST["nom"]))){
+  /*  if(empty(trim($_POST["nom"]))){
         $errorn = "*Vous devez insérer votre nom.";
     } else{
         // Prepare a select statement
@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
-                /* store result */
+
                 mysqli_stmt_store_result($stmt);
 
                 if(mysqli_stmt_num_rows($stmt) == 1){
@@ -47,13 +47,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Close statement
             mysqli_stmt_close($stmt);
         }
-    }
+    }*/
 
     if(empty(trim($_POST["sic"]))){
         $errors = "*Vous devez insérer votre SIC No. ";
     }
     else{
         $sic= trim($_POST["sic"]);
+    }
+
+    if(empty(trim($_POST["nom"]))){
+        $errorn = "*Vous devez insérer votre nom. ";
+    }
+    else{
+        $nom= trim($_POST["nom"]);
     }
 
 
@@ -119,7 +126,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         $sql = "INSERT INTO application (idUser, sic, nom, prenom, email, createdDate, equipement , lab, dept, description) VALUES ('" . $_SESSION['id'] ."', '$sic', '$nom', '$prenom', '$email', '$createdDate', '$equipement','$lab', '$dept', '$description')";
         if(mysqli_query($link, $sql)){
-            echo "Records inserted successfully.";
+            header("location: applicationForm.php");
+            //echo "Records inserted successfully.";
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
         }
